@@ -1,6 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import featuredStudent from '../assets/img2.jpg'
+import featuredStudent from '../../assets/img2.jpg'
 
 export default function Hero({ onGetStarted }){
   return (

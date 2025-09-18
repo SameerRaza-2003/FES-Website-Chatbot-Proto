@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import { Menu, X } from 'lucide-react'
-import logo from '../assets/image.png'
+import logo from '../../assets/image.png'
 
 export default function Navbar({ onGetStarted, onBackToHome, currentPage }){
   const [open, setOpen] = useState(false)

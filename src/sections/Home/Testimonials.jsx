@@ -4,11 +4,11 @@ import 'swiper/css'
 import 'swiper/css/autoplay'
 import 'swiper/css/pagination'
 import SwiperCore, { Autoplay, Pagination } from 'swiper'
-import story1 from '../assets/stories/1.jpeg'
-import story2 from '../assets/stories/2.jpeg'
-import story3 from '../assets/stories/3.jpeg'
-import story4 from '../assets/stories/4.jpeg'
-import story5 from '../assets/stories/5.jpeg'
+import story1 from '../../assets/stories/1.jpeg'
+import story2 from '../../assets/stories/2.jpeg'
+import story3 from '../../assets/stories/3.jpeg'
+import story4 from '../../assets/stories/4.jpeg'
+import story5 from '../../assets/stories/5.jpeg'
 
 SwiperCore.use([Autoplay, Pagination])
 

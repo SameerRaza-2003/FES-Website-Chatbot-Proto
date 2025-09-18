@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import HomePage from './pages/HomePage'
 import Recommendations from './pages/Recommendations'
-import Navbar from './sections/Navbar'
+import Navbar from './sections/Home/Navbar'
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home')
