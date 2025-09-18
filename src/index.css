@@ -6,12 +6,27 @@
 .glass {
   @apply bg-white/30 backdrop-blur-sm border border-white/20 rounded-2xl;
 }
+
 .glass-strong {
   @apply bg-white/20 backdrop-blur-md border border-white/10 rounded-3xl;
 }
+
 /* subtle gradient text */
 .gradient-text {
-  background: linear-gradient(90deg,#06b6d4,#3b82f6);
+  background: linear-gradient(90deg, #06b6d4, #3b82f6);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+
+
+@media (max-width:375px) {
+  .steps {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
+  .small-padding{
+    padding: 2px;
+  }
 }

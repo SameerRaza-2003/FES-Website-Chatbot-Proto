@@ -1,0 +1,108 @@
+.stepper {
+    position: relative;
+    margin: 40px 0;
+    width: 100%;
+}
+
+/* Full Connector Line */
+.stepper-line {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    height: 4px;
+    background: #d1d5db;
+    /* gray background */
+    border-radius: 2px;
+    z-index: 0;
+}
+
+/* Active Progress Line */
+.stepper-progress {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    height: 4px;
+    background: linear-gradient(90deg, #4f46e5, #3b82f6);
+    border-radius: 2px;
+    z-index: 1;
+    transition: width 0.3s ease;
+}
+
+/* Steps Wrapper */
+.stepper-steps {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    z-index: 2;
+}
+
+/* Step Item */
+.stepper-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Step Circle */
+.stepper-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 14px;
+    color: #4b5563;
+    /* gray-600 */
+    background: #e5e7eb;
+    /* gray-200 */
+    transition: all 0.3s ease;
+}
+
+.stepper-circle.active {
+    color: #fff;
+    background: linear-gradient(135deg, #4f46e5, #3b82f6);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.4);
+}
+
+/* Step Label */
+.stepper-label {
+    margin-top: 8px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 400;
+    color: #9ca3af;
+    /* gray-400 */
+    transition: color 0.3s ease;
+}
+
+@media (max-width:425px) {
+    .stepper-label {
+        font-size: 10px;
+    }
+
+    .stepper-circle {
+        width: 30px;
+        height: 30px;
+    }
+    .stepper-line{
+        top:15px;
+    }
+}
+
+.stepper-label.current {
+    font-weight: 600;
+    color: #4f46e5;
+}
+
+/* Step Counter */
+.stepper-counter {
+    position: absolute;
+    bottom: -30px;
+    right: 0;
+    font-size: 13px;
+    color: #6b7280;
+    /* gray-500 */
+}
