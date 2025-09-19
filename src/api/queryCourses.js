@@ -7,7 +7,7 @@ export async function queryCourses(answers, top_k = 40) {
   console.log("👉 Sending query:", query) // Debug log
 
   // Send to FastAPI
-  const res = await axios.post('/api/search', {
+  const res = await axios.post('https://fes-coursefinder-backend.onrender.com/api/search', {
     query,
     answers,
     top_k,
