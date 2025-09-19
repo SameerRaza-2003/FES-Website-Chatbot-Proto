@@ -68,13 +68,6 @@ export default function Results({ answers }) {
                 <div className="mt-3 text-sm text-gray-600">
                   {r.discipline || ''} {r.specialization ? `• ${r.specialization}` : ''}
                 </div>
-
-                {/* Save button */}
-                <div className="mt-5 flex justify-end">
-                  <button className="px-5 py-2 text-sm font-semibold bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-full shadow hover:from-indigo-600 hover:to-purple-600 transition-all duration-300">
-                    Save
-                  </button>
-                </div>
               </div>
             ))}
           </div>
