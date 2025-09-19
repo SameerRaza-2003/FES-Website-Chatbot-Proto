@@ -44,8 +44,8 @@ export default function Results({ answers }) {
                 {/* Top Row */}
                 <div className="flex justify-between items-start mb-3">
                   <div>
-                    {/* Course title */}
-                    <div className="text-lg font-semibold text-gray-900">
+                    {/* Course title as bluish text */}
+                    <div className="text-lg font-semibold text-indigo-600 hover:text-indigo-700 transition-colors duration-200">
                       {r.course_title || 'Untitled course'}
                     </div>
                     <div className="text-sm text-gray-500 mt-1">
