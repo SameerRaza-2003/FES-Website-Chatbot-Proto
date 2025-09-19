@@ -39,20 +39,16 @@ export default function Results({ answers }) {
             {results.slice(page * per, page * per + per).map((r, idx) => (
               <div
                 key={r.course_id || r.id || idx}
-                className="p-6 border rounded-3xl bg-white shadow-md hover:shadow-xl transition-all duration-300"
+                className="p-6 border rounded-3xl bg-white shadow-md hover:shadow-lg transition-all duration-300"
               >
                 {/* Top Row */}
-                <div className="flex justify-between items-start">
+                <div className="flex justify-between items-start mb-3">
                   <div>
-                    <a
-                      href={r.course_link || '#'}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="text-lg font-semibold text-indigo-600 hover:text-indigo-700 hover:underline transition-colors duration-200"
-                    >
+                    {/* Course title */}
+                    <div className="text-lg font-semibold text-gray-900">
                       {r.course_title || 'Untitled course'}
-                    </a>
-                    <div className="text-sm text-gray-400 mt-1">
+                    </div>
+                    <div className="text-sm text-gray-500 mt-1">
                       {r.institute_name || 'Unknown'} {r.country ? `• ${r.country}` : ''}
                     </div>
                   </div>
@@ -64,10 +60,12 @@ export default function Results({ answers }) {
                   </div>
                 </div>
 
-                {/* Discipline */}
-                <div className="mt-3 text-sm text-gray-600">
-                  {r.discipline || ''} {r.specialization ? `• ${r.specialization}` : ''}
-                </div>
+                {/* Discipline / specialization */}
+                { (r.discipline || r.specialization) && (
+                  <div className="text-sm text-gray-600 mt-2">
+                    {r.discipline || ''} {r.specialization ? `• ${r.specialization}` : ''}
+                  </div>
+                )}
               </div>
             ))}
           </div>
