@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-route
 import HomePage from './pages/HomePage'
 import Recommendations from './pages/Recommendations'
 import CourseFinder from './pages/CourseFinder'
-import Navbar from './sections/Home/Navbar'
+import Navbar from './sections/Navbar/Navbar'
 
 function AppContent() {
   const navigate = useNavigate()
