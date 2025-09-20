@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-route
 import HomePage from './pages/HomePage'
 import Recommendations from './pages/Recommendations'
 import CourseFinder from './pages/CourseFinder'
+import BookSession from './pages/BookSession'
 import Navbar from './sections/Navbar/Navbar'
 
 function AppContent() {
@@ -20,6 +21,7 @@ function AppContent() {
           <Route path="/" element={<HomePage onGetStarted={() => navigate('/recommendations')} />} />
           <Route path="/recommendations" element={<Recommendations onBackToHome={() => navigate('/')} />} />
           <Route path="/course-finder" element={<CourseFinder onBackToHome={() => navigate('/')} />} />
+          <Route path="/book-session" element={<BookSession onBackToHome={() => navigate('/')} />} />
         </Routes>
       </main>
     </div>

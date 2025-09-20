@@ -33,6 +33,12 @@ export default function Navbar() {
                   Course Finder
                 </Link>
                 <Link
+                  to="/book-session"
+                  className="ml-2 px-4 py-2 rounded-full border border-fes-blue text-fes-blue hover:bg-fes-blue hover:text-white transition"
+                >
+                  Book Session
+                </Link>
+                <Link
                   to="/recommendations"
                   className="ml-2 px-4 py-2 rounded-full bg-gradient-to-r from-fes-blue to-fes-deep text-white"
                 >
@@ -70,6 +76,13 @@ export default function Navbar() {
                   className="block w-full py-2 rounded-full border border-fes-blue text-fes-blue hover:bg-fes-blue hover:text-white transition text-center"
                 >
                   Course Finder
+                </Link>
+                <Link
+                  to="/book-session"
+                  onClick={() => setOpen(false)}
+                  className="block w-full py-2 rounded-full border border-fes-blue text-fes-blue hover:bg-fes-blue hover:text-white transition text-center"
+                >
+                  Book Session
                 </Link>
                 <Link
                   to="/recommendations"

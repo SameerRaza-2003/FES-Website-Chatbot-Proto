@@ -7,7 +7,7 @@ import BookSession from './pages/BookSession'
 
 createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    {/* <App /> */}
-    <BookSession />
+    <App />
+    
   </React.StrictMode>
 )
