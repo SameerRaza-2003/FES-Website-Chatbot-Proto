@@ -21,6 +21,7 @@ export default function Navbar() {
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-4">
             <Link to="/" className="hover:text-fes-deep text-center px-1 py-1">Home</Link>
+            <Link to="/countries" className="hover:text-fes-deep text-center px-1 py-1">Countries</Link>
             <Link to="/" className="hover:text-fes-deep text-center px-1 py-1" onClick={(e) => { e.preventDefault(); document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' }); }}>Services</Link>
             <Link to="/" className="hover:text-fes-deep text-center px-1 py-1" onClick={(e) => { e.preventDefault(); document.getElementById('testimonials')?.scrollIntoView({ behavior: 'smooth' }); }}>Testimonials</Link>
             <Link
@@ -53,6 +54,7 @@ export default function Navbar() {
         {open && (
           <div className="md:hidden glass-strong p-4 mt-2 space-y-3">
             <Link to="/" className="block" onClick={() => setOpen(false)}>Home</Link>
+            <Link to="/countries" className="block" onClick={() => setOpen(false)}>Countries</Link>
             <Link to="/" className="block" onClick={(e) => { e.preventDefault(); document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' }); setOpen(false); }}>Services</Link>
             <Link to="/" className="block" onClick={(e) => { e.preventDefault(); document.getElementById('testimonials')?.scrollIntoView({ behavior: 'smooth' }); setOpen(false); }}>Testimonials</Link>
             <Link

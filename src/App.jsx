@@ -4,6 +4,8 @@ import HomePage from './pages/HomePage'
 import Recommendations from './pages/Recommendations'
 import CourseFinder from './pages/CourseFinder'
 import BookSession from './pages/BookSession'
+import CountriesPage from './pages/CountriesPage'
+import CountryDetailPage from './pages/CountryDetailPage'
 import Navbar from './sections/Navbar/Navbar'
 
 function AppContent() {
@@ -22,6 +24,8 @@ function AppContent() {
           <Route path="/recommendations" element={<Recommendations onBackToHome={() => navigate('/')} />} />
           <Route path="/course-finder" element={<CourseFinder onBackToHome={() => navigate('/')} />} />
           <Route path="/book-session" element={<BookSession onBackToHome={() => navigate('/')} />} />
+          <Route path="/countries" element={<CountriesPage />} />
+          <Route path="/countries/:slug" element={<CountryDetailPage />} />
         </Routes>
       </main>
     </div>
