@@ -15,44 +15,33 @@ export default function Navbar() {
         <div className="flex items-center justify-between py-5">
           {/* Logo (always links home) */}
           <Link to="/" className="flex items-center gap-3">
-            <img src={logo} alt="FES Consultancy" className="h-14 w-auto" />
+            <img src={logo} alt="FES Consultancy" className="h-12 w-auto min-w-[100px]" />
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center gap-6">
-            {isHome ? (
-              <>
-                <a className="hover:text-fes-deep" href="#home">Home</a>
-                <a className="hover:text-fes-deep" href="#why-us">Why Us</a>
-                <a className="hover:text-fes-deep" href="#services">Services</a>
-                <a className="hover:text-fes-deep" href="#testimonials">Testimonials</a>
-                <Link
-                  to="/course-finder"
-                  className="ml-4 px-4 py-2 rounded-full border border-fes-blue text-fes-blue hover:bg-fes-blue hover:text-white transition"
-                >
-                  Course Finder
-                </Link>
-                <Link
-                  to="/book-session"
-                  className="ml-2 px-4 py-2 rounded-full border border-fes-blue text-fes-blue hover:bg-fes-blue hover:text-white transition"
-                >
-                  Book Session
-                </Link>
-                <Link
-                  to="/recommendations"
-                  className="ml-2 px-4 py-2 rounded-full bg-gradient-to-r from-fes-blue to-fes-deep text-white"
-                >
-                  AI Assistant
-                </Link>
-              </>
-            ) : (
-              <Link
-                to="/"
-                className="ml-4 px-4 py-2 rounded-full bg-gradient-to-r from-fes-blue to-fes-deep text-white"
-              >
-                Back to Home
-              </Link>
-            )}
+          <div className="hidden md:flex items-center gap-4">
+            <Link to="/" className="hover:text-fes-deep text-center px-1 py-1">Home</Link>
+            <Link to="/" className="hover:text-fes-deep text-center px-1 py-1" onClick={(e) => { e.preventDefault(); document.getElementById('why-us')?.scrollIntoView({ behavior: 'smooth' }); }}>Why Us</Link>
+            <Link to="/" className="hover:text-fes-deep text-center px-1 py-1" onClick={(e) => { e.preventDefault(); document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' }); }}>Services</Link>
+            <Link to="/" className="hover:text-fes-deep text-center px-1 py-1" onClick={(e) => { e.preventDefault(); document.getElementById('testimonials')?.scrollIntoView({ behavior: 'smooth' }); }}>Testimonials</Link>
+            <Link
+              to="/course-finder"
+              className="ml-2 px-3 py-1.5 rounded-full border border-fes-blue text-fes-blue hover:bg-fes-blue hover:text-white transition text-center justify-center inline-flex items-center"
+            >
+              Course Finder
+            </Link>
+            <Link
+              to="/recommendations"
+              className="ml-1 px-3 py-1.5 rounded-full bg-gradient-to-r from-fes-blue to-fes-deep text-white text-center justify-center inline-flex items-center"
+            >
+              AI Assistant
+            </Link>
+            <Link
+              to="/book-session"
+              className="ml-2 px-4 py-2 rounded-full bg-gradient-to-r from-fes-blue to-fes-deep text-white font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-center justify-center inline-flex items-center"
+            >
+              Book Session
+            </Link>
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -64,43 +53,31 @@ export default function Navbar() {
         {/* Mobile Menu */}
         {open && (
           <div className="md:hidden glass-strong p-4 mt-2 space-y-3">
-            {isHome ? (
-              <>
-                <a href="#home" className="block" onClick={() => setOpen(false)}>Home</a>
-                <a href="#why-us" className="block" onClick={() => setOpen(false)}>Why Us</a>
-                <a href="#services" className="block" onClick={() => setOpen(false)}>Services</a>
-                <a href="#testimonials" className="block" onClick={() => setOpen(false)}>Testimonials</a>
-                <Link
-                  to="/course-finder"
-                  onClick={() => setOpen(false)}
-                  className="block w-full py-2 rounded-full border border-fes-blue text-fes-blue hover:bg-fes-blue hover:text-white transition text-center"
-                >
-                  Course Finder
-                </Link>
-                <Link
-                  to="/book-session"
-                  onClick={() => setOpen(false)}
-                  className="block w-full py-2 rounded-full border border-fes-blue text-fes-blue hover:bg-fes-blue hover:text-white transition text-center"
-                >
-                  Book Session
-                </Link>
-                <Link
-                  to="/recommendations"
-                  onClick={() => setOpen(false)}
-                  className="block w-full py-2 rounded-full bg-gradient-to-r from-fes-blue to-fes-deep text-white text-center"
-                >
-                  AI Assistant
-                </Link>
-              </>
-            ) : (
-              <Link
-                to="/"
-                onClick={() => setOpen(false)}
-                className="block w-full py-2 rounded-full bg-gradient-to-r from-fes-blue to-fes-deep text-white text-center"
-              >
-                Back to Home
-              </Link>
-            )}
+            <Link to="/" className="block" onClick={() => setOpen(false)}>Home</Link>
+            <Link to="/" className="block" onClick={(e) => { e.preventDefault(); document.getElementById('why-us')?.scrollIntoView({ behavior: 'smooth' }); setOpen(false); }}>Why Us</Link>
+            <Link to="/" className="block" onClick={(e) => { e.preventDefault(); document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' }); setOpen(false); }}>Services</Link>
+            <Link to="/" className="block" onClick={(e) => { e.preventDefault(); document.getElementById('testimonials')?.scrollIntoView({ behavior: 'smooth' }); setOpen(false); }}>Testimonials</Link>
+            <Link
+              to="/course-finder"
+              onClick={() => setOpen(false)}
+              className="block w-full py-2 rounded-full border border-fes-blue text-fes-blue hover:bg-fes-blue hover:text-white transition text-center"
+            >
+              Course Finder
+            </Link>
+            <Link
+              to="/recommendations"
+              onClick={() => setOpen(false)}
+              className="block w-full py-2 rounded-full bg-gradient-to-r from-fes-blue to-fes-deep text-white text-center"
+            >
+              AI Assistant
+            </Link>
+            <Link
+              to="/book-session"
+              onClick={() => setOpen(false)}
+              className="block w-full py-3 rounded-full bg-gradient-to-r from-fes-blue to-fes-deep text-white font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-center"
+            >
+              Book Session
+            </Link>
           </div>
         )}
       </div>

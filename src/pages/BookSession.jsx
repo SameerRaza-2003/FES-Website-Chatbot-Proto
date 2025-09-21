@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 export default function BookSession() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-50 via-white to-green-50">
+    <section className="relative min-h-screen overflow-hidden bg-gradient-to-br from-blue-50 via-white to-green-50">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
@@ -44,7 +44,7 @@ export default function BookSession() {
         />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-8 lg:gap-12 items-center relative z-10 py-6 md:py-8 lg:py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-8 lg:gap-12 items-center relative z-10 py-8 md:py-12 lg:py-16">
         {/* Left Side: Heading + Description */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}

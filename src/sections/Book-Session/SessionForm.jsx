@@ -152,6 +152,15 @@ export default function MultiStepForm() {
     }
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      if (step < steps.length - 1 && isStepValid()) {
+        nextStep();
+      }
+    }
+  };
+
   const isStepValid = () => {
     return steps[step].fields.every(field => {
       const value = formData[field.name];
@@ -236,16 +245,16 @@ export default function MultiStepForm() {
   return (
     <section className="relative w-full h-full flex flex-col items-center justify-center overflow-hidden">
       <div className="w-full max-w-4xl lg:max-w-5xl h-full flex flex-col justify-center p-0">
-        <div className="glass-strong rounded-2xl shadow-2xl p-4 sm:p-6 md:p-8 lg:p-8 flex flex-col h-full">
+        <div className="glass-strong rounded-2xl shadow-2xl p-3 sm:p-4 md:p-5 lg:p-6 flex flex-col h-full">
           {/* Progress Bar */}
-          <div className="mb-6">
-            <div className="flex items-center justify-between mb-2">
-              <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-center bg-gradient-to-r from-fes-blue to-fes-deep bg-clip-text text-transparent">
+          <div className="mb-4">
+            <div className="flex items-center justify-between mb-1">
+              <h2 className="text-lg sm:text-xl md:text-2xl font-extrabold text-center bg-gradient-to-r from-fes-blue to-fes-deep bg-clip-text text-transparent">
                 {steps[step].title}
               </h2>
-              <span className="text-sm text-gray-500">{step + 1} of {steps.length}</span>
+              <span className="text-xs text-gray-500">{step + 1} of {steps.length}</span>
             </div>
-            <p className="text-gray-600 text-center mb-4 text-sm sm:text-base">
+            <p className="text-gray-600 text-center mb-3 text-xs sm:text-sm">
               {steps[step].description}
             </p>
             <div className="w-full bg-gray-200 rounded-full h-2">
@@ -267,7 +276,7 @@ export default function MultiStepForm() {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -50 }}
                   transition={{ duration: 0.5 }}
-                  className="space-y-4 sm:space-y-6"
+                  className="space-y-3 sm:space-y-4"
                 >
                   {steps[step].fields.map((field, idx) => (
                     <motion.div
@@ -277,7 +286,7 @@ export default function MultiStepForm() {
                       transition={{ delay: idx * 0.1 }}
                       className="flex flex-col"
                     >
-                      <label className="font-semibold text-gray-700 mb-2 text-sm sm:text-base">
+                      <label className="font-semibold text-gray-700 mb-1 text-xs sm:text-sm">
                         {field.label} {field.required && <span className="text-red-500">*</span>}
                       </label>
                       <div className="relative">
@@ -288,7 +297,8 @@ export default function MultiStepForm() {
                             value={formData[field.name] || ""}
                             onChange={handleChange}
                             onBlur={handleBlur}
-                            className={`w-full px-4 py-3 rounded-xl border-2 focus:ring-1 focus:ring-fes-blue focus:ring-offset-1 focus:outline-none transition-all duration-300 ${
+                            onKeyDown={handleKeyPress}
+                            className={`w-full px-3 py-2 rounded-lg border-2 focus:ring-1 focus:ring-fes-blue focus:ring-offset-1 focus:outline-none transition-all duration-300 ${
                               errors[field.name] && touchedFields.has(field.name)
                                 ? 'border-red-500 bg-red-50'
                                 : formData[field.name]
@@ -311,8 +321,9 @@ export default function MultiStepForm() {
                             value={formData[field.name] || ""}
                             onChange={handleChange}
                             onBlur={handleBlur}
+                            onKeyDown={handleKeyPress}
                             placeholder={`Enter your ${field.label.toLowerCase()}`}
-                            className={`w-full px-4 py-3 rounded-xl border-2 focus:ring-1 focus:ring-fes-blue focus:ring-offset-1 focus:outline-none transition-all duration-300 ${
+                            className={`w-full px-3 py-2 rounded-lg border-2 focus:ring-1 focus:ring-fes-blue focus:ring-offset-1 focus:outline-none transition-all duration-300 ${
                               errors[field.name] && touchedFields.has(field.name)
                                 ? 'border-red-500 bg-red-50'
                                 : formData[field.name]
@@ -352,14 +363,14 @@ export default function MultiStepForm() {
             </div>
 
             {/* Navigation Buttons */}
-            <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mt-6 sm:mt-8">
+            <div className="flex flex-col sm:flex-row justify-between items-center gap-3 mt-4 sm:mt-6">
               {step > 0 && (
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   type="button"
                   onClick={prevStep}
-                  className="w-full sm:w-auto px-6 py-3 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold transition-all duration-300 flex items-center justify-center"
+                  className="w-full sm:w-auto px-5 py-2 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold transition-all duration-300 flex items-center justify-center"
                 >
                   <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -418,7 +429,7 @@ export default function MultiStepForm() {
             </div>
 
             {/* Step Indicators */}
-            <div className="flex justify-center mt-6 sm:mt-8 space-x-2">
+            <div className="flex justify-center mt-4 sm:mt-6 space-x-2">
               {steps.map((_, i) => (
                 <motion.button
                   key={i}
