@@ -152,15 +152,6 @@ export default function MultiStepForm() {
     }
   };
 
-  const handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      if (step < steps.length - 1 && isStepValid()) {
-        nextStep();
-      }
-    }
-  };
-
   const isStepValid = () => {
     return steps[step].fields.every(field => {
       const value = formData[field.name];
@@ -182,33 +173,41 @@ export default function MultiStepForm() {
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    
-    if (!isStepValid()) {
-      // Mark all fields as touched to show errors
-      steps[step].fields.forEach(field => {
-        setTouchedFields(prev => new Set(prev).add(field.name));
-        const error = validateField(field.name, formData[field.name], field);
-        setErrors(prev => ({ ...prev, [field.name]: error }));
-      });
-      return;
-    }
+ const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    setIsSubmitting(true);
+  if (!isStepValid()) {
+    steps[step].fields.forEach(field => {
+      setTouchedFields(prev => new Set(prev).add(field.name));
+      const error = validateField(field.name, formData[field.name], field);
+      setErrors(prev => ({ ...prev, [field.name]: error }));
+    });
+    return;
+  }
+
+  setIsSubmitting(true);
+
+  try {
+    const response = await fetch("https://script.google.com/macros/s/AKfycbzOPTQ7Grkb2Z7LUkua0JAv-IVnDswxtdi8-1SCh6cMFQsb8ujNo4IsytbveOAEUV5I/exec", {
+      method: "POST",
+      body: JSON.stringify(formData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      mode: 'no-cors' // This bypasses CORS but we won't get the response
+    });
+
+    setSubmitSuccess(true);
+    localStorage.removeItem('bookSessionFormData');
     
-    // Simulate API call
-    try {
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      console.log("Form Data:", formData);
-      setSubmitSuccess(true);
-      localStorage.removeItem('bookSessionFormData');
-    } catch (error) {
-      console.error('Submission failed:', error);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+  } catch (error) {
+    console.error("Network error:", error);
+    alert("There was an error submitting your form. Please try again.");
+  } finally {
+    setIsSubmitting(false);
+  }
+};
+
 
   const resetForm = () => {
     setFormData({});
@@ -244,17 +243,17 @@ export default function MultiStepForm() {
 
   return (
     <section className="relative w-full h-full flex flex-col items-center justify-center overflow-hidden">
-      <div className="w-full max-w-4xl lg:max-w-5xl h-full flex flex-col justify-center p-0">
-        <div className="glass-strong rounded-2xl shadow-2xl p-3 sm:p-4 md:p-5 lg:p-6 flex flex-col h-full">
+      <div className="w-full max-w-3xl h-full flex flex-col justify-center p-0">
+        <div className="glass-strong rounded-2xl shadow-2xl p-4 sm:p-6 md:p-8 lg:p-14 flex flex-col h-full">
           {/* Progress Bar */}
-          <div className="mb-4">
-            <div className="flex items-center justify-between mb-1">
-              <h2 className="text-lg sm:text-xl md:text-2xl font-extrabold text-center bg-gradient-to-r from-fes-blue to-fes-deep bg-clip-text text-transparent">
+          <div className="mb-6">
+            <div className="flex items-center justify-between mb-2">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-center bg-gradient-to-r from-fes-blue to-fes-deep bg-clip-text text-transparent">
                 {steps[step].title}
               </h2>
-              <span className="text-xs text-gray-500">{step + 1} of {steps.length}</span>
+              <span className="text-sm text-gray-500">{step + 1} of {steps.length}</span>
             </div>
-            <p className="text-gray-600 text-center mb-3 text-xs sm:text-sm">
+            <p className="text-gray-600 text-center mb-4 text-sm sm:text-base">
               {steps[step].description}
             </p>
             <div className="w-full bg-gray-200 rounded-full h-2">
@@ -267,8 +266,8 @@ export default function MultiStepForm() {
             </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="flex-1 flex flex-col justify-between overflow-visible">
-            <div className="flex-1 overflow-visible pr-2 w-full max-w-4xl lg:max-w-5xl mx-auto">
+          <form onSubmit={handleSubmit} className="flex-1 flex flex-col justify-between">
+            <div className="flex-1 min-h-0 pr-2">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={step}
@@ -276,7 +275,7 @@ export default function MultiStepForm() {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -50 }}
                   transition={{ duration: 0.5 }}
-                  className="space-y-3 sm:space-y-4"
+                  className="space-y-4 sm:space-y-6"
                 >
                   {steps[step].fields.map((field, idx) => (
                     <motion.div
@@ -286,7 +285,7 @@ export default function MultiStepForm() {
                       transition={{ delay: idx * 0.1 }}
                       className="flex flex-col"
                     >
-                      <label className="font-semibold text-gray-700 mb-1 text-xs sm:text-sm">
+                      <label className="font-semibold text-gray-700 mb-2 text-sm sm:text-base">
                         {field.label} {field.required && <span className="text-red-500">*</span>}
                       </label>
                       <div className="relative">
@@ -297,13 +296,12 @@ export default function MultiStepForm() {
                             value={formData[field.name] || ""}
                             onChange={handleChange}
                             onBlur={handleBlur}
-                            onKeyDown={handleKeyPress}
-                            className={`w-full px-3 py-2 rounded-lg border-2 focus:ring-1 focus:ring-fes-blue focus:ring-offset-1 focus:outline-none transition-all duration-300 ${
+                            className={`w-full px-4 py-2 rounded-xl border-2 focus:ring-2 focus:ring-fes-blue/20 focus:border-fes-blue focus:outline-none transition-all duration-300 overflow-visible {
                               errors[field.name] && touchedFields.has(field.name)
-                                ? 'border-red-500 bg-red-50'
+                                ? 'border-red-500 bg-red-50 shadow-red-200'
                                 : formData[field.name]
-                                ? 'border-green-500 bg-green-50'
-                                : 'border-gray-200 glass'
+                                ? 'border-green-500 bg-green-50 shadow-green-200'
+                                : 'border-gray-200 glass hover:border-gray-300'
                             }`}
                           >
                             <option value="">Select...</option>
@@ -321,14 +319,13 @@ export default function MultiStepForm() {
                             value={formData[field.name] || ""}
                             onChange={handleChange}
                             onBlur={handleBlur}
-                            onKeyDown={handleKeyPress}
                             placeholder={`Enter your ${field.label.toLowerCase()}`}
-                            className={`w-full px-3 py-2 rounded-lg border-2 focus:ring-1 focus:ring-fes-blue focus:ring-offset-1 focus:outline-none transition-all duration-300 ${
+                            className={`w-full px-4 py-2 rounded-xl border-2 focus:ring-2 focus:ring-fes-blue/20 focus:border-fes-blue focus:outline-none transition-all duration-300 overflow-visible {
                               errors[field.name] && touchedFields.has(field.name)
-                                ? 'border-red-500 bg-red-50'
+                                ? 'border-red-500 bg-red-50 shadow-red-200'
                                 : formData[field.name]
-                                ? 'border-green-500 bg-green-50'
-                                : 'border-gray-200 glass'
+                                ? 'border-green-500 bg-green-50 shadow-green-200'
+                                : 'border-gray-200 glass hover:border-gray-300'
                             }`}
                           />
                         )}
@@ -363,14 +360,14 @@ export default function MultiStepForm() {
             </div>
 
             {/* Navigation Buttons */}
-            <div className="flex flex-col sm:flex-row justify-between items-center gap-3 mt-4 sm:mt-6">
+            <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mt-6 sm:mt-8">
               {step > 0 && (
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   type="button"
                   onClick={prevStep}
-                  className="w-full sm:w-auto px-5 py-2 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold transition-all duration-300 flex items-center justify-center"
+                  className="w-full sm:w-auto px-6 py-3 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold transition-all duration-300 flex items-center justify-center"
                 >
                   <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -429,23 +426,23 @@ export default function MultiStepForm() {
             </div>
 
             {/* Step Indicators */}
-            <div className="flex justify-center mt-4 sm:mt-6 space-x-2">
+            <div className="flex justify-center mt-6 sm:mt-8 space-x-3 pb-2">
               {steps.map((_, i) => (
                 <motion.button
                   key={i}
-                  whileHover={{ scale: 1.2 }}
-                  whileTap={{ scale: 0.9 }}
+                  whileHover={{ scale: 1.3 }}
+                  whileTap={{ scale: 0.8 }}
                   onClick={() => {
                     if (i <= step || (i > 0 && isStepValid())) {
                       setStep(i);
                     }
                   }}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                  className={`w-4 h-4 rounded-full transition-all duration-300 shadow-sm ${
                     i === step
-                      ? 'bg-fes-blue scale-125'
+                      ? 'bg-fes-blue scale-125 shadow-lg shadow-fes-blue/30'
                       : i < step
-                      ? 'bg-green-500'
-                      : 'bg-gray-300 hover:bg-gray-400'
+                      ? 'bg-green-500 shadow-md shadow-green-200'
+                      : 'bg-gray-300 hover:bg-gray-400 hover:shadow-md'
                   }`}
                 />
               ))}
