@@ -21,7 +21,6 @@ export default function Navbar() {
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-4">
             <Link to="/" className="hover:text-fes-deep text-center px-1 py-1">Home</Link>
-            <Link to="/" className="hover:text-fes-deep text-center px-1 py-1" onClick={(e) => { e.preventDefault(); document.getElementById('why-us')?.scrollIntoView({ behavior: 'smooth' }); }}>Why Us</Link>
             <Link to="/" className="hover:text-fes-deep text-center px-1 py-1" onClick={(e) => { e.preventDefault(); document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' }); }}>Services</Link>
             <Link to="/" className="hover:text-fes-deep text-center px-1 py-1" onClick={(e) => { e.preventDefault(); document.getElementById('testimonials')?.scrollIntoView({ behavior: 'smooth' }); }}>Testimonials</Link>
             <Link
@@ -38,7 +37,7 @@ export default function Navbar() {
             </Link>
             <Link
               to="/book-session"
-              className="ml-2 px-4 py-2 rounded-full bg-gradient-to-r from-fes-blue to-fes-deep text-white font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-center justify-center inline-flex items-center"
+              className="ml-2 px-4 py-2 rounded-full bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-center justify-center inline-flex items-center"
             >
               Book Session
             </Link>
@@ -54,7 +53,6 @@ export default function Navbar() {
         {open && (
           <div className="md:hidden glass-strong p-4 mt-2 space-y-3">
             <Link to="/" className="block" onClick={() => setOpen(false)}>Home</Link>
-            <Link to="/" className="block" onClick={(e) => { e.preventDefault(); document.getElementById('why-us')?.scrollIntoView({ behavior: 'smooth' }); setOpen(false); }}>Why Us</Link>
             <Link to="/" className="block" onClick={(e) => { e.preventDefault(); document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' }); setOpen(false); }}>Services</Link>
             <Link to="/" className="block" onClick={(e) => { e.preventDefault(); document.getElementById('testimonials')?.scrollIntoView({ behavior: 'smooth' }); setOpen(false); }}>Testimonials</Link>
             <Link
@@ -74,7 +72,7 @@ export default function Navbar() {
             <Link
               to="/book-session"
               onClick={() => setOpen(false)}
-              className="block w-full py-3 rounded-full bg-gradient-to-r from-fes-blue to-fes-deep text-white font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-center"
+              className="block w-full py-3 rounded-full bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-center"
             >
               Book Session
             </Link>
