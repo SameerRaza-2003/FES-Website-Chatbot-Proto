@@ -3,6 +3,7 @@ import Hero from '../sections/Home/Hero'
 import Services from '../sections/Home/Services'
 import Testimonials from '../sections/Home/Testimonials'
 import Footer from '../sections/Home/Footer'
+import Faqs from '../sections/Home/Faqs'
 
 export default function HomePage({ onGetStarted }){
   return (
@@ -10,6 +11,7 @@ export default function HomePage({ onGetStarted }){
       <Hero onGetStarted={onGetStarted} />
       <Services />
       <Testimonials />
+      <Faqs />
       <Footer />
     </>
   )

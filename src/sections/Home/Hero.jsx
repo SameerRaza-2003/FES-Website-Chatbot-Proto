@@ -124,7 +124,7 @@ export default function Hero({ onGetStarted }){
       </div>
       {/* Why Cards Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="grid md:grid-cols-3 lg:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-12 place-items-center md:place-items-stretch">
           {[
             {icon: GraduationCap, title: 'Expert Counselors', text: 'Years of admissions experience across disciplines.'},
             {icon: Globe, title: 'Global Partnerships', text: 'Universities across North America, UK, EU, Australia.'},
@@ -140,9 +140,9 @@ export default function Hero({ onGetStarted }){
                 initial={{opacity:0, y:20}}
                 animate={{opacity:1, y:0}}
                 transition={{delay:0.8 + idx * 0.1, duration:0.6}}
-                className="glass p-4 sm:p-6 hover:scale-105 transition-transform"
+                className="glass p-4 sm:p-6 hover:scale-105 transition-transform text-center md:text-left w-full shadow-lg border border-white/30 backdrop-blur-md"
               >
-                <Icon className="w-8 h-8 text-fes-deep mb-4"/>
+                <Icon className="w-8 h-8 text-fes-deep mb-4 mx-auto md:mx-0"/>
                 <div className="font-semibold">{it.title}</div>
                 <div className="text-sm text-gray-500 mt-2">{it.text}</div>
               </motion.div>
