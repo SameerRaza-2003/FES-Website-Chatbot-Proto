@@ -183,6 +183,9 @@ export default function CountryDetailPage() {
   const [details, setDetails] = useState(null)
 
   useEffect(() => {
+    // Scroll to top when component mounts or slug changes
+    window.scrollTo(0, 0)
+    
     const foundCountry = countries.find(c => c.slug === slug)
     const foundDetails = countryDetails[slug]
     
