@@ -1,54 +1,64 @@
-import React, { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { motion } from 'framer-motion'
-import { countries } from '../data/countries'
-import countriesBackground from '../assets/countries_background.png'
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import { countries } from "../data/countries";
+import countriesBackground from "../assets/countries_background.png";
 
 // Counter component for animated numbers
-const AnimatedCounter = ({ end, duration = 3000, suffix = '' }) => {
-  const [count, setCount] = useState(0)
+const AnimatedCounter = ({ end, duration = 3000, suffix = "" }) => {
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
-    let startTime = null
-    const startValue = 0
-    const endValue = end
+    let startTime = null;
+    const startValue = 0;
+    const endValue = end;
 
     const animate = (currentTime) => {
-      if (startTime === null) startTime = currentTime
-      const progress = Math.min((currentTime - startTime) / duration, 1)
-      
+      if (startTime === null) startTime = currentTime;
+      const progress = Math.min((currentTime - startTime) / duration, 1);
+
       // Linear interpolation for even increments
-      const currentCount = Math.floor(progress * (endValue - startValue) + startValue)
-      
-      setCount(currentCount)
-      
+      const currentCount = Math.floor(
+        progress * (endValue - startValue) + startValue
+      );
+
+      setCount(currentCount);
+
       if (progress < 1) {
-        requestAnimationFrame(animate)
+        requestAnimationFrame(animate);
       }
-    }
-    
-    requestAnimationFrame(animate)
-  }, [end, duration])
+    };
 
-  return <span>{count}{suffix}</span>
-}
-
-export default function CountriesPage() {
-  const navigate = useNavigate()
-
-  const handleCountryClick = (slug) => {
-    navigate(`/countries/${slug}`)
-  }
+    requestAnimationFrame(animate);
+  }, [end, duration]);
 
   return (
-    <div 
+    <span>
+      {count}
+      {suffix}
+    </span>
+  );
+};
+
+export default function CountriesPage({onGetStarted}) {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  const navigate = useNavigate();
+
+  const handleCountryClick = (slug) => {
+    navigate(`/countries/${slug}`);
+  };
+
+  return (
+    <div
       className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 relative"
       style={{
         backgroundImage: `url(${countriesBackground})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center center',
-        backgroundRepeat: 'no-repeat',
-        backgroundAttachment: 'fixed'
+        backgroundSize: "cover",
+        backgroundPosition: "center center",
+        backgroundRepeat: "no-repeat",
+        backgroundAttachment: "fixed",
       }}
     >
       {/* Overlay for better text readability */}
@@ -66,40 +76,48 @@ export default function CountriesPage() {
               Study Destinations
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-              Explore world-class education opportunities across the globe. 
+              Explore world-class education opportunities across the globe.
               Discover your perfect study destination and unlock your potential.
             </p>
-            
+
             {/* Additional descriptive content */}
             <div className="max-w-4xl mx-auto space-y-6">
               <p className="text-lg text-gray-700 leading-relaxed">
-                From the historic universities of the United Kingdom to the innovative campuses of Australia, 
-                each destination offers unique opportunities for academic growth and cultural enrichment. 
-                Whether you're seeking cutting-edge research facilities, diverse cultural experiences, or 
-                pathways to global career opportunities, we'll help you find the perfect match.
+                From the historic universities of the United Kingdom to the
+                innovative campuses of Australia, each destination offers unique
+                opportunities for academic growth and cultural enrichment.
+                Whether you're seeking cutting-edge research facilities, diverse
+                cultural experiences, or pathways to global career
+                opportunities, we'll help you find the perfect match.
               </p>
-              
+
               <div className="grid md:grid-cols-3 gap-6 mt-8">
                 <div className="bg-white/90 rounded-xl p-6 shadow-lg">
                   <div className="text-3xl font-bold text-fes-deep mb-2">
                     <AnimatedCounter end={12} duration={2000} />
                   </div>
                   <div className="text-gray-700 font-medium">Countries</div>
-                  <div className="text-sm text-gray-600">Top study destinations worldwide</div>
+                  <div className="text-sm text-gray-600">
+                    Top study destinations worldwide
+                  </div>
                 </div>
                 <div className="bg-white/90 rounded-xl p-6 shadow-lg">
                   <div className="text-3xl font-bold text-fes-deep mb-2">
                     <AnimatedCounter end={500} duration={2000} suffix="+" />
                   </div>
                   <div className="text-gray-700 font-medium">Universities</div>
-                  <div className="text-sm text-gray-600">World-renowned institutions</div>
+                  <div className="text-sm text-gray-600">
+                    World-renowned institutions
+                  </div>
                 </div>
                 <div className="bg-white/90 rounded-xl p-6 shadow-lg">
                   <div className="text-3xl font-bold text-fes-deep mb-2">
                     <AnimatedCounter end={1000} duration={2000} suffix="+" />
                   </div>
                   <div className="text-gray-700 font-medium">Programs</div>
-                  <div className="text-sm text-gray-600">Diverse academic opportunities</div>
+                  <div className="text-sm text-gray-600">
+                    Diverse academic opportunities
+                  </div>
                 </div>
               </div>
             </div>
@@ -118,10 +136,10 @@ export default function CountriesPage() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                whileHover={{ 
-                  y: -8, 
+                whileHover={{
+                  y: -8,
                   scale: 1.02,
-                  transition: { duration: 0.3 }
+                  transition: { duration: 0.3 },
                 }}
                 onClick={() => handleCountryClick(country.slug)}
                 className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer overflow-hidden group border border-gray-100"
@@ -141,11 +159,11 @@ export default function CountriesPage() {
                   <h3 className="text-2xl font-bold text-gray-900 mb-2 group-hover:text-fes-deep transition-colors duration-300">
                     {country.name}
                   </h3>
-                  
+
                   <p className="text-fes-deep font-semibold mb-3 text-sm uppercase tracking-wide">
                     {country.tagline}
                   </p>
-                  
+
                   <p className="text-gray-600 leading-relaxed text-sm">
                     {country.description}
                   </p>
@@ -153,8 +171,18 @@ export default function CountriesPage() {
                   {/* Hover indicator */}
                   <div className="mt-4 flex items-center text-fes-deep opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <span className="text-sm font-medium">Learn more</span>
-                    <svg className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    <svg
+                      className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform duration-300"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 5l7 7-7 7"
+                      />
                     </svg>
                   </div>
                 </div>
@@ -176,18 +204,18 @@ export default function CountriesPage() {
               Need Help Choosing?
             </h2>
             <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-              Our expert consultants can help you find the perfect study destination 
-              based on your goals, budget, and preferences.
+              Our expert consultants can help you find the perfect study
+              destination based on your goals, budget, and preferences.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button
-                onClick={() => navigate('/course-finder')}
+                onClick={() => navigate("/course-finder")}
                 className="px-6 py-3 bg-fes-deep text-white rounded-full hover:bg-blue-900 transition-colors duration-300 font-semibold"
               >
                 Find Courses
               </button>
               <button
-                onClick={() => navigate('/book-session')}
+                onClick={() => navigate("/book-session")}
                 className="px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-full hover:shadow-lg transform hover:scale-105 transition-all duration-300 font-semibold"
               >
                 Book Consultation
@@ -197,5 +225,5 @@ export default function CountriesPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }
