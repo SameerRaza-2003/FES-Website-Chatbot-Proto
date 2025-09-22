@@ -75,14 +75,14 @@ export default function CountriesPage({onGetStarted}) {
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
               Study Destinations
             </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+            <p className="text-xl text-black-600 max-w-3xl mx-auto mb-8">
               Explore world-class education opportunities across the globe.
               Discover your perfect study destination and unlock your potential.
             </p>
 
             {/* Additional descriptive content */}
             <div className="max-w-4xl mx-auto space-y-6">
-              <p className="text-lg text-gray-700 leading-relaxed">
+              <p className="text-lg text-black-700 leading-relaxed">
                 From the historic universities of the United Kingdom to the
                 innovative campuses of Australia, each destination offers unique
                 opportunities for academic growth and cultural enrichment.

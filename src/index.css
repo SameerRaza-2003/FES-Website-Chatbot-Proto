@@ -48,6 +48,7 @@
   animation: pulse-slow 4s ease-in-out infinite;
 }
 
+
 .animate-slide-in {
   animation: slide-in 0.6s ease-out;
 }
