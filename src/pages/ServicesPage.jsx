@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react'
-import { motion } from 'framer-motion'
+import React, { useEffect, useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { GraduationCap, Award, FileText, Languages, Users, Plane, ArrowRight, CheckCircle, Star, MessageCircle } from 'lucide-react'
+import { GraduationCap, Award, FileText, Languages, Users, Plane, ArrowRight, CheckCircle, Star, MessageCircle, Sparkles, Zap } from 'lucide-react'
+import servicesImg from "../assets/services-background.jpg"
 
 const services = [
   {
@@ -177,7 +178,77 @@ const services = [
   }
 ]
 
+const TypingText = ({ text, className = "" }) => {
+  const [displayedText, setDisplayedText] = useState("")
+  const [currentIndex, setCurrentIndex] = useState(0)
+
+  useEffect(() => {
+    if (currentIndex < text.length) {
+      const timeout = setTimeout(() => {
+        setDisplayedText(prev => prev + text[currentIndex])
+        setCurrentIndex(prev => prev + 1)
+      }, 50)
+      return () => clearTimeout(timeout)
+    }
+  }, [currentIndex, text])
+
+  return (
+    <span className={className}>
+      {displayedText}
+      <motion.span
+        animate={{ opacity: [1, 0, 1] }}
+        transition={{ duration: 0.8, repeat: Infinity }}
+        className="inline-block w-1 h-6 bg-white ml-1 align-middle"
+      />
+    </span>
+  )
+}
+
+const GradientText = ({ children, className = "" }) => (
+  <span className={`bg-gradient-to-r from-blue-300 to-blue-100 bg-clip-text text-transparent ${className}`}>
+    {children}
+  </span>
+)
+
+const FloatingElement = ({ children, delay = 0 }) => (
+  <motion.div
+    animate={{
+      y: [0, -20, 0],
+      rotate: [0, 5, -5, 0]
+    }}
+    transition={{
+      duration: 6,
+      delay,
+      repeat: Infinity,
+      ease: "easeInOut"
+    }}
+  >
+    {children}
+  </motion.div>
+)
+
+const PulseBackground = () => (
+  <motion.div
+    className="absolute inset-0"
+    animate={{
+      background: [
+        "radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%)",
+        "radial-gradient(circle at 80% 50%, rgba(147, 51, 234, 0.1) 0%, transparent 50%)",
+        "radial-gradient(circle at 40% 80%, rgba(236, 72, 153, 0.1) 0%, transparent 50%)",
+        "radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%)"
+      ]
+    }}
+    transition={{
+      duration: 8,
+      repeat: Infinity,
+      ease: "linear"
+    }}
+  />
+)
+
 export default function ServicesPage() {
+  const [hoveredCard, setHoveredCard] = useState(null)
+  
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
@@ -185,80 +256,166 @@ export default function ServicesPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50">
       {/* Hero Section */}
-      <section className="pt-32 pb-20 px-6 bg-gradient-to-r from-blue-600 to-purple-700 text-white">
-        <div className="max-w-7xl mx-auto text-center">
+      <section className="pt-32 pb-20 px-6 bg-gradient-to-r from-blue-600 to-blue-700 text-white relative overflow-hidden">
+        <PulseBackground />
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat" 
+          style={{
+            backgroundImage: `url(${servicesImg})`,
+            opacity: 0.2
+          }}
+        />
+        
+        {/* Floating Elements */}
+        <FloatingElement delay={0}>
+          <div className="absolute top-20 left-10 text-yellow-300 opacity-60">
+            <Sparkles className="w-8 h-8" />
+          </div>
+        </FloatingElement>
+        <FloatingElement delay={1}>
+          <div className="absolute top-32 right-20 text-blue-300 opacity-60">
+            <Zap className="w-6 h-6" />
+          </div>
+        </FloatingElement>
+        <FloatingElement delay={2}>
+          <div className="absolute bottom-32 left-20 text-purple-300 opacity-60">
+            <Star className="w-7 h-7" />
+          </div>
+        </FloatingElement>
+        
+        <div className="relative z-10 max-w-7xl mx-auto text-center">
           <motion.h1 
             className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            initial={{ opacity: 0, y: 50, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 1, type: "spring", stiffness: 100 }}
           >
-            Our Comprehensive Services
+            <GradientText className="text-white drop-shadow-lg">
+              <TypingText text="Our Comprehensive Services" />
+            </GradientText>
           </motion.h1>
+          
           <motion.p 
-            className="text-xl md:text-2xl text-blue-100 max-w-4xl mx-auto mb-8"
+            className="text-xl md:text-2xl text-blue-100 max-w-4xl mx-auto mb-8 font-light"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
           >
             Expert guidance for every step of your study abroad journey
           </motion.p>
+          
           <motion.div 
-            className="flex flex-wrap justify-center gap-4"
+            className="flex flex-wrap justify-center gap-6"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
           >
-            <div className="bg-white/20 backdrop-blur-sm rounded-lg px-6 py-3">
-              <div className="text-3xl font-bold">9+</div>
-              <div className="text-sm">Services</div>
-            </div>
-            <div className="bg-white/20 backdrop-blur-sm rounded-lg px-6 py-3">
-              <div className="text-3xl font-bold">20+</div>
-              <div className="text-sm">Years Experience</div>
-            </div>
-            <div className="bg-white/20 backdrop-blur-sm rounded-lg px-6 py-3">
-              <div className="text-3xl font-bold">50K+</div>
-              <div className="text-sm">Students Helped</div>
-            </div>
+            {[
+              { value: "9+", label: "Services" },
+              { value: "20+", label: "Years Experience" },
+              { value: "50K+", label: "Students Helped" }
+            ].map((stat, index) => (
+              <motion.div
+                key={stat.label}
+                className="bg-white/20 backdrop-blur-md rounded-xl px-8 py-4 border border-white/30 shadow-xl"
+                whileHover={{ 
+                  scale: 1.05, 
+                  background: "rgba(255, 255, 255, 0.3)",
+                  boxShadow: "0 20px 40px rgba(0, 0, 0, 0.2)"
+                }}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.3, delay: 1 + index * 0.2 }}
+              >
+                <motion.div 
+                  className="text-4xl font-bold text-white"
+                  animate={{ scale: [1, 1.1, 1] }}
+                  transition={{ duration: 2, repeat: Infinity, delay: index * 0.5 }}
+                >
+                  {stat.value}
+                </motion.div>
+                <div className="text-sm font-medium text-blue-100 mt-1">{stat.label}</div>
+              </motion.div>
+            ))}
           </motion.div>
         </div>
       </section>
 
       {/* Services Grid */}
-      <section className="py-20 px-6">
-        <div className="max-w-7xl mx-auto">
+      <section className="py-20 px-6 relative">
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-purple-50 opacity-50" />
+        <div className="relative max-w-7xl mx-auto">
           <motion.div 
             className="text-center mb-16"
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 1, type: "spring" }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 
+              className="text-3xl md:text-4xl font-bold text-gray-900 mb-4"
+            >
               Complete Study Abroad Solutions
             </h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              From career counseling to post-departure support, we provide end-to-end services to ensure your success
-            </p>
+            <motion.p 
+              className="text-lg text-gray-600 max-w-3xl mx-auto"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+            >
+              From career counseling to post-departure support, we provide 
+              <span className="font-semibold text-blue-600">
+                {" "}end-to-end services{" "}
+              </span>
+              to ensure your success
+            </motion.p>
           </motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, index) => (
               <motion.div
                 key={service.title}
-                className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden group relative"
+                initial={{ opacity: 0, y: 50, rotateX: 15 }}
+                whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+                transition={{ duration: 0.8, delay: index * 0.15, type: "spring", stiffness: 100 }}
                 viewport={{ once: true }}
+                whileHover={{ 
+                  y: -10,
+                  rotateY: 5,
+                  scale: 1.02,
+                  boxShadow: "0 30px 60px rgba(0, 0, 0, 0.15)"
+                }}
+                onHoverStart={() => setHoveredCard(index)}
+                onHoverEnd={() => setHoveredCard(null)}
               >
-                <div className="p-8">
+                {/* Animated Background */}
+                <motion.div 
+                  className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-purple-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  initial={{ opacity: 0 }}
+                />
+                
+                {/* Glow Effect */}
+                <AnimatePresence>
+                  {hoveredCard === index && (
+                    <motion.div
+                      className="absolute inset-0 bg-blue-400/20 rounded-3xl"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                  )}
+                </AnimatePresence>
+                
+                <div className="p-8 relative z-10">
                   <div className="flex items-center mb-6">
-                    <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4 group-hover:bg-blue-200 transition-colors">
-                      <service.icon className="w-6 h-6 text-blue-600" />
+                    <div className="w-14 h-14 bg-gradient-to-br from-blue-100 to-purple-100 rounded-xl flex items-center justify-center mr-4 group-hover:from-blue-200 group-hover:to-purple-200 transition-all duration-300 shadow-lg">
+                      <service.icon className="w-7 h-7 text-blue-600" />
                     </div>
-                    <h3 className="text-xl font-bold text-gray-900">{service.title}</h3>
+                    <h3 className="text-xl font-bold text-gray-900">
+                      {service.title}
+                    </h3>
                   </div>
                   
                   <p className="text-gray-600 mb-6 leading-relaxed">
@@ -288,7 +445,7 @@ export default function ServicesPage() {
                     <ol className="space-y-2">
                       {service.process.map((step, idx) => (
                         <li key={idx} className="flex items-start text-gray-600">
-                          <span className="w-5 h-5 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-xs font-semibold mr-2 mt-0.5 flex-shrink-0">
+                          <span className="w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center text-xs font-bold mr-2 mt-0.5 flex-shrink-0 shadow-md">
                             {idx + 1}
                           </span>
                           {step}
@@ -319,43 +476,113 @@ export default function ServicesPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-6 bg-gradient-to-r from-blue-600 to-purple-700 text-white">
-        <div className="max-w-4xl mx-auto text-center">
+      <section className="py-20 px-6 relative overflow-hidden">
+        {/* Simple Background */}
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-700" />
+        
+        {/* Floating Particles */}
+        {[...Array(6)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-2 h-2 bg-white/30 rounded-full"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`
+            }}
+            animate={{
+              y: [0, -100, 0],
+              x: [0, Math.random() * 100 - 50, 0],
+              opacity: [0, 1, 0],
+              scale: [0, 1, 0]
+            }}
+            transition={{
+              duration: 4 + Math.random() * 2,
+              repeat: Infinity,
+              delay: Math.random() * 2,
+              ease: "easeInOut"
+            }}
+          />
+        ))}
+        
+        <div className="relative z-10 max-w-4xl mx-auto text-center">
           <motion.h2 
-            className="text-3xl md:text-4xl font-bold mb-6"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-white drop-shadow-lg"
+            initial={{ opacity: 0, y: 50, scale: 0.9 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 1, type: "spring", stiffness: 100 }}
             viewport={{ once: true }}
+            animate={{
+              textShadow: [
+                "0 0 20px rgba(255, 255, 255, 0.5)",
+                "0 0 30px rgba(255, 255, 255, 0.8)",
+                "0 0 20px rgba(255, 255, 255, 0.5)"
+              ]
+            }}
+          
           >
             Ready to Start Your Journey?
           </motion.h2>
+          
           <motion.p 
-            className="text-xl text-blue-100 mb-8"
+            className="text-xl md:text-2xl text-blue-100 mb-12 font-light max-w-3xl mx-auto"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
             viewport={{ once: true }}
           >
-            Let our expert team guide you through every step of your study abroad experience
+            Let our expert team guide you through every step of your 
+            <span className="font-bold text-white drop-shadow-md">
+              {" "}study abroad experience{" "}
+            </span>
           </motion.p>
+          
           <motion.div 
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+            className="flex flex-col sm:flex-row gap-6 justify-center items-center"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
             viewport={{ once: true }}
           >
-            <Link
-              to="/recommendations"
-              className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-fes-blue to-fes-deep text-white font-semibold rounded-full hover:shadow-lg transform hover:scale-105 transition-all duration-300"
-            >
-              <MessageCircle className="mr-2 w-5 h-5" />
-              Talk with Virtual Assistant
-            </Link>
-            <button className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold rounded-full hover:shadow-lg transform hover:scale-105 transition-all duration-300">
-              Book a Consultation
-            </button>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Link
+                to="/recommendations"
+                className="inline-flex items-center px-10 py-5 bg-gradient-to-r from-blue-400 to-blue-600 text-white font-bold rounded-full shadow-2xl hover:shadow-blue-500/50 transform transition-all duration-300 relative overflow-hidden group"
+              >
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-blue-500 to-blue-700 opacity-0 group-hover:opacity-100 duration-300"
+                  initial={{ x: "-100%" }}
+                  whileHover={{ x: "0%" }}
+                  transition={{ duration: 0.6 }}
+                />
+                <motion.div
+                  animate={{ x: [0, 5, 0] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                  className="relative z-10"
+                >
+                  <MessageCircle className="mr-3 w-6 h-6" />
+                </motion.div>
+                <span className="relative z-10 text-lg">Talk with Virtual Assistant</span>
+              </Link>
+            </motion.div>
+            
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <button className="inline-flex items-center px-10 py-5 bg-gradient-to-r from-green-400 to-emerald-600 text-white font-bold rounded-full shadow-2xl hover:shadow-green-500/50 transform transition-all duration-300 relative overflow-hidden group">
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-green-500 to-emerald-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  initial={{ x: "-100%" }}
+                  whileHover={{ x: "0%" }}
+                  transition={{ duration: 0.6 }}
+                />
+                <motion.div
+                  animate={{ rotate: [0, 10, -10, 0] }}
+                  transition={{ duration: 4, repeat: Infinity }}
+                  className="relative z-10"
+                >
+                  <Sparkles className="mr-3 w-6 h-6" />
+                </motion.div>
+                <span className="relative z-10 text-lg">Book a Consultation</span>
+              </button>
+            </motion.div>
           </motion.div>
         </div>
       </section>
