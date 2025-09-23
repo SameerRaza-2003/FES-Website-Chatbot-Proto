@@ -2,14 +2,12 @@ import React, { useState, useEffect, useRef } from 'react'
 import { Menu, X } from 'lucide-react'
 import { Link, useLocation } from 'react-router-dom'
 import AnimatedLogo from '../../components/AnimatedLogo'
-import fesLogo from '../../assets/logo/FES.png'
 import { countries } from '../../data/countries'
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
   const [countriesDropdown, setCountriesDropdown] = useState(false)
   const [dropdownTimeout, setDropdownTimeout] = useState(null)
-  const [fesLogoAnimating, setFesLogoAnimating] = useState(false)
   const dropdownRef = useRef(null)
   const location = useLocation()
 
@@ -31,16 +29,10 @@ export default function Navbar() {
 
   // Cleanup timeout on unmount
   useEffect(() => {
-    // Trigger FES logo animation after diamonds complete
-    const fesTimer = setTimeout(() => {
-      setFesLogoAnimating(true)
-    }, 1600)
-
     return () => {
       if (dropdownTimeout) {
         clearTimeout(dropdownTimeout)
       }
-      clearTimeout(fesTimer)
     }
   }, [dropdownTimeout])
 
@@ -48,18 +40,14 @@ export default function Navbar() {
     <nav className="fixed w-full z-40 top-0 left-0 bg-white shadow-md">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between py-2">
-          {/* Logo (always links home) */}
-          <Link to="/" className="relative flex items-center" style={{ width: '140px', height: '80px' }}>
+          {/* Logo */}
+          <Link to="/" className="relative flex items-center"  >
             <AnimatedLogo />
-            <img 
-              src={fesLogo} 
-              alt="FES" 
-              className={`fes-logo fes-logo-absolute ${fesLogoAnimating ? 'animate' : ''}`}
-            />
+
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden lg:flex items-center gap-4">
             <Link to="/" className="hover:text-fes-deep text-center px-1 py-1">Home</Link>
             <div 
               className="relative"
@@ -142,14 +130,14 @@ export default function Navbar() {
           </div>
 
           {/* Mobile Menu Toggle */}
-          <button onClick={() => setOpen(!open)} className="md:hidden p-2">
+          <button onClick={() => setOpen(!open)} className="lg:hidden p-2">
             {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
 
         {/* Mobile Menu */}
         {open && (
-          <div className="md:hidden glass-strong p-4 space-y-3 fixed top-20 left-0 right-0 bottom-0 overflow-y-auto z-30">
+          <div className="lg:hidden glass-strong p-4 space-y-3 fixed top-20 left-0 right-0 bottom-0 overflow-y-auto z-30">
             <Link to="/" className="block" onClick={() => setOpen(false)}>Home</Link>
             <div className="relative">
               <button 

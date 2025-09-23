@@ -1,7 +1,7 @@
 /* Animated Logo Styles */
 .logo-container {
   position: relative;
-  width: 80px;
+  width: 160px;
   height: 80px;
 }
 
@@ -45,7 +45,7 @@
 
 .diamond-2.animate {
   opacity: 1;
-  transform: translateX(1px) translateY(5px) rotate(0deg) scale(1);
+  transform: translateX(-79px) translateY(5px) rotate(0deg) scale(1);
   filter: blur(0px) brightness(1);
 }
 
@@ -77,7 +77,7 @@
 
 .diamond-4.animate {
   opacity: 1;
-  transform: translateX(1px) translateY(-3px) rotate(0deg) scale(1);
+  transform: translateX(-79px) translateY(-3px) rotate(0deg) scale(1);
   filter: blur(0px) brightness(1);
 }
 
