@@ -6,6 +6,7 @@ import CourseFinder from './pages/CourseFinder'
 import BookSession from './pages/BookSession'
 import CountriesPage from './pages/CountriesPage'
 import CountryDetailPage from './pages/CountryDetailPage'
+import ServicesPage from './pages/ServicesPage'
 import Navbar from './sections/Navbar/Navbar'
 
 function AppContent() {
@@ -26,6 +27,7 @@ function AppContent() {
           <Route path="/book-session" element={<BookSession onBackToHome={() => navigate('/')} />} />
           <Route path="/countries" element={<CountriesPage />} />
           <Route path="/countries/:slug" element={<CountryDetailPage />} />
+          <Route path="/services" element={<ServicesPage />} />
         </Routes>
       </main>
     </div>

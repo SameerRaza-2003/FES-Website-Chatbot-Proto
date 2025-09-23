@@ -52,7 +52,7 @@ export default function CountriesPage({onGetStarted}) {
 
   return (
     <div
-      className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 relative"
+      className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 relative pt-5"
       style={{
         backgroundImage: `url(${countriesBackground})`,
         backgroundSize: "cover",

@@ -119,7 +119,7 @@ export default function Navbar() {
                 </div>
               )}
             </div>
-            <Link to="/" className="hover:text-fes-deep text-center px-1 py-1" onClick={(e) => { e.preventDefault(); document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' }); }}>Services</Link>
+            <Link to="/services" className="hover:text-fes-deep text-center px-1 py-1">Services</Link>
             <Link to="/" className="hover:text-fes-deep text-center px-1 py-1" onClick={(e) => { e.preventDefault(); document.getElementById('testimonials')?.scrollIntoView({ behavior: 'smooth' }); }}>Testimonials</Link>
             <Link
               to="/course-finder"
@@ -195,7 +195,7 @@ export default function Navbar() {
                 </div>
               )}
             </div>
-            <Link to="/" className="block" onClick={(e) => { e.preventDefault(); document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' }); setOpen(false); }}>Services</Link>
+            <Link to="/services" className="block" onClick={() => setOpen(false)}>Services</Link>
             <Link to="/" className="block" onClick={(e) => { e.preventDefault(); document.getElementById('testimonials')?.scrollIntoView({ behavior: 'smooth' }); setOpen(false); }}>Testimonials</Link>
             <Link
               to="/course-finder"

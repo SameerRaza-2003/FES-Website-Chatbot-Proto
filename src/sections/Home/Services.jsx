@@ -1,61 +1,44 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { GraduationCap, Award, FileText, Languages, Users, Plane } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { GraduationCap, Award, FileText, Languages, Users, Plane, ArrowRight } from 'lucide-react'
 
-const services = [
+const featuredServices = [
   {
     icon: Users,
     title: 'Career Counseling',
-    description: 'When one talks about career counseling, many questions come to mind. Should one look for career guidance services? Would it help in making the right choices? Would it create avenues for the student or should we apply direct?',
-    features: ['Career Assessment', 'Strategic Planning', 'Decision Making']
+    description: 'Personalized guidance to help you make informed decisions about your academic and professional future.',
+    features: ['Career Assessment', 'Strategic Planning']
   },
   {
     icon: GraduationCap,
     title: 'Admission Guidance',
-    description: 'Taking admission to any university is not an easy task; it requires a lot of research and admission guidance. This task can be achieved if you have the right career counselor or career guidance at FES.',
-    features: ['University Research', 'Application Strategy', 'Admission Support']
-  },
-  {
-    icon: FileText,
-    title: 'Medical Requirements',
-    description: 'Precautionary health tests for viral and non-viral diseases have been a part of the student visa process to study abroad. These tests are conducted to determine if any infectious disease is existent in the student.',
-    features: ['Health Screening', 'Medical Documentation', 'Compliance Support']
-  },
-  {
-    icon: Plane,
-    title: 'Pre Departure Orientation',
-    description: 'We provide comprehensive support to the student and guide on different aspects necessary for a student. FES consultants support students in booking an air ticket, enrollment in the desired university, accommodation, and airport pickup.',
-    features: ['Travel Planning', 'University Enrollment', 'Accommodation Support']
-  },
-  {
-    icon: Award,
-    title: 'Appeals and Review',
-    description: 'When the country you are applying for refuses a student visa and the student appeals to the tribunal to reconsider, it is known as a visa rejection appeal. Mostly, visas are denied when students do not have proper guidance.',
-    features: ['Visa Appeal Support', 'Document Review', 'Tribunal Guidance']
-  },
-  {
-    icon: Users,
-    title: 'Arranging Education Expos & Events',
-    description: 'FES Higher Education Consultants was established in 2003 with an aim to serve aspiring students and help them in fulfilling their dreams by placing them in the best universities in the courses that best match their skillset.',
-    features: ['Education Expos', 'University Events', 'Networking Opportunities']
-  },
-  {
-    icon: Plane,
-    title: 'Post Departure Support',
-    description: 'Moving away from a familiar environment is difficult for anyone, more so for a child who has led a cocooned life and is venturing out on his/her own. Change is always challenging for anyone to adjust.',
-    features: ['Settlement Support', 'Cultural Adjustment', 'Ongoing Guidance']
-  },
-  {
-    icon: Languages,
-    title: 'IELTS & TOEFL',
-    description: 'For applying to any university, you must meet their language entry criteria. Most universities that teach English language courses require their applicants to prove their English language proficiency.',
-    features: ['Test Preparation', 'Practice Sessions', 'Score Improvement']
+    description: 'Expert support throughout the university application process to maximize your acceptance chances.',
+    features: ['University Research', 'Application Strategy']
   },
   {
     icon: FileText,
     title: 'Student Visa Assistance',
-    description: 'A student visa is a unique stamp put on the student\'s passport ensuring entry of the applicant to the enrolled educational institution. Any student seeking higher education in other countries must obtain a permit, a visa.',
-    features: ['Visa Application', 'Documentation Support', 'Embassy Liaison']
+    description: 'Comprehensive guidance through the complex visa application process for successful approval.',
+    features: ['Visa Application', 'Documentation Support']
+  },
+  {
+    icon: Languages,
+    title: 'IELTS & TOEFL Preparation',
+    description: 'Specialized training programs to help you achieve your target scores in language proficiency tests.',
+    features: ['Test Preparation', 'Score Improvement']
+  },
+  {
+    icon: Plane,
+    title: 'Pre-Departure Support',
+    description: 'Complete assistance with travel arrangements, accommodation, and cultural orientation.',
+    features: ['Travel Planning', 'Accommodation Support']
+  },
+  {
+    icon: Award,
+    title: 'Post-Departure Support',
+    description: 'Ongoing guidance to ensure smooth settlement and academic success in your new environment.',
+    features: ['Settlement Support', 'Cultural Adjustment']
   }
 ]
 
@@ -106,17 +89,25 @@ export default function Services(){
             Our <span className="gradient-text">Services</span>
           </motion.h2>
           <motion.p 
-            className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto"
+            className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             Comprehensive support for your study abroad journey - from initial planning to successful settlement
           </motion.p>
+          <motion.p 
+            className="text-sm sm:text-base text-gray-500 max-w-2xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+          >
+            We offer 9+ specialized services designed to ensure your success at every step
+          </motion.p>
         </motion.div>
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          {services.map((service, i) => {
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-12">
+          {featuredServices.map((service, i) => {
             const Icon = service.icon
             return (
               <motion.div 
@@ -181,13 +172,33 @@ export default function Services(){
                     ))}
                   </ul>
                   
-                  {/* Decorative bottom accent instead of button */}
+                  {/* Decorative bottom accent */}
                   <div className="h-1 bg-gradient-to-r from-fes-blue to-fes-deep rounded-full mt-auto" />
                 </div>
               </motion.div>
             )
           })}
         </div>
+        
+        {/* Call to Action */}
+        <motion.div 
+          className="text-center"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.8 }}
+          viewport={{ once: true }}
+        >
+          <Link
+            to="/services"
+            className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-fes-blue to-fes-deep text-white font-semibold rounded-full hover:shadow-lg transform hover:scale-105 transition-all duration-300"
+          >
+            View All Services
+            <ArrowRight className="ml-2 w-5 h-5" />
+          </Link>
+          <p className="mt-4 text-sm text-gray-500">
+            Explore all 9+ services with detailed information and processes
+          </p>
+        </motion.div>
       </div>
     </section>
   )
