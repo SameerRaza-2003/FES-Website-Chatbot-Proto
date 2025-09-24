@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { GraduationCap, Globe, Users, BookOpen, Award, Shield } from 'lucide-react'
-import featuredStudent from '../../assets/img2.jpg'
+import { GraduationCap, Globe, Users, BookOpen, Award, Shield, ChevronLeft, ChevronRight } from 'lucide-react'
 import airplaneBg from '../../assets/airplane.png'
+import heroImage1 from '../../assets/hero/fesconsultants2025_09_23_22_30_3321d5ee0a-fee7-440b-b5d3-2e0830cd9756.jpg'
+import heroImage2 from '../../assets/hero/fesconsultants2025_09_23_22_30_48b7a6971a-be6d-4e78-bccb-73cf7538a959.jpg'
+import heroImage3 from '../../assets/hero/fesconsultants2025_09_23_22_32_1682df95c9-5d2f-4933-952a-d7953c5d0cd9.jpg'
+import heroImage4 from '../../assets/hero/fesconsultants2025_09_23_22_32_33703a02d9-5158-4940-9bdc-e5650cfe3ac5.jpg'
 
 const useCounter = (target, duration = 2000, suffix = '') => {
   const [count, setCount] = useState(0)
@@ -47,6 +50,27 @@ export default function Hero({ onGetStarted }){
   const x = useTransform(scrollYProgress, [0, 1], ['0%', '0%'])
   const scale = useTransform(scrollYProgress, [0, 0.5], [0.6, 1.5])
   const opacity = useTransform(scrollYProgress, [0, 0.3], [0.3, 0])
+  
+  // Carousel state
+  const [currentSlide, setCurrentSlide] = useState(0)
+  const heroImages = [heroImage1, heroImage2, heroImage3, heroImage4]
+  
+  // Auto-rotate carousel
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % heroImages.length)
+    }, 4000) // Change slide every 4 seconds
+    
+    return () => clearInterval(interval)
+  }, [heroImages.length])
+  
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % heroImages.length)
+  }
+  
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + heroImages.length) % heroImages.length)
+  }
   
   return (
     <section id="home" className="relative overflow-hidden pt-4 sm:pt-6 md:pt-8">
@@ -103,19 +127,58 @@ export default function Hero({ onGetStarted }){
             transition={{delay:0.5, duration:0.7}}
             className="hidden md:flex justify-center items-center"
           >
-            <div className="w-full max-w-md glass-strong p-6 transform -rotate-2 shadow-2xl">
-              <div className="relative h-80 rounded-xl overflow-hidden">
-                <img 
-                  src={featuredStudent} 
-                  alt="Featured Student Success Story"
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
-                  <div className="text-white">
-                    <div className="text-sm opacity-90">Featured Student</div>
-                    <div className="font-semibold text-xl">Success Story</div>
-                    <div className="text-xs opacity-75">Admitted to Dream University</div>
-                  </div>
+            <div className="w-full max-w-lg glass-strong p-3 transform -rotate-2 shadow-2xl">
+              <div className="relative h-[28rem] rounded-xl overflow-hidden">
+                {/* Carousel Images */}
+                {heroImages.map((image, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0 }}
+                    animate={{ 
+                      opacity: currentSlide === index ? 1 : 0,
+                      scale: currentSlide === index ? 1 : 1.1
+                    }}
+                    transition={{ duration: 0.5 }}
+                    className="absolute inset-0"
+                  >
+                    <img 
+                      src={image} 
+                      alt={`Hero Image ${index + 1}`}
+                      className="w-full h-full object-cover"
+                    />
+                  </motion.div>
+                ))}
+                
+                {/* Navigation Arrows */}
+                <button
+                  onClick={prevSlide}
+                  className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 rounded-full p-2 shadow-lg transition-all duration-300 hover:scale-110"
+                  aria-label="Previous slide"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={nextSlide}
+                  className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 rounded-full p-2 shadow-lg transition-all duration-300 hover:scale-110"
+                  aria-label="Next slide"
+                >
+                  <ChevronRight className="w-4 h-4" />
+                </button>
+                
+                {/* Slide Indicators */}
+                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                  {heroImages.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentSlide(index)}
+                      className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                        currentSlide === index 
+                          ? 'bg-white scale-125' 
+                          : 'bg-white/50 hover:bg-white/75'
+                      }`}
+                      aria-label={`Go to slide ${index + 1}`}
+                    />
+                  ))}
                 </div>
               </div>
             </div>
