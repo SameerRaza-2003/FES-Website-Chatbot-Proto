@@ -1,0 +1,80 @@
+/* src/Country_Finder/quiz.css */
+
+.quiz-card {
+  max-width: 700px;
+  margin: 3rem auto;
+  padding: 2.5rem;
+  background: #ffffff;
+  border-radius: 1.5rem;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.quiz-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1d4ed8; /* blue-700 */
+  margin-bottom: 0.5rem;
+}
+
+.quiz-subtitle {
+  font-size: 1rem;
+  color: #4b5563; /* gray-600 */
+  margin-bottom: 1.5rem;
+}
+
+.progress-container {
+  width: 100%;
+  background: #e5e7eb; /* gray-200 */
+  height: 8px;
+  border-radius: 9999px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+
+.progress-bar {
+  background: linear-gradient(90deg, #3b82f6, #06b6d4); /* blue → cyan */
+  height: 8px;
+  transition: width 0.4s ease;
+}
+
+.step-text {
+  font-size: 0.9rem;
+  color: #6b7280; /* gray-500 */
+  margin-bottom: 1rem;
+}
+
+.question-text {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #111827; /* gray-900 */
+  margin-bottom: 1.5rem;
+}
+
+.options-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.option-button {
+  padding: 1rem;
+  border-radius: 0.75rem;
+  background: #f0f9ff; /* blue-50 */
+  border: 1px solid #bfdbfe; /* blue-200 */
+  color: #1e3a8a; /* blue-900 */
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+}
+
+.option-button:hover {
+  background: #dbeafe; /* blue-100 */
+  transform: translateY(-2px);
+}
+
+.loading-text {
+  font-size: 1.2rem;
+  color: #374151; /* gray-700 */
+  margin-top: 1rem;
+}
