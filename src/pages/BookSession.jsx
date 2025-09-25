@@ -1,7 +1,13 @@
 import SessionForm from "../sections/Book-Session/SessionForm";
 import { motion } from "framer-motion";
+import React, { useEffect } from 'react';
 
 export default function BookSession() {
+  useEffect(() => {
+    // Scroll to top when component mounts
+    window.scrollTo(0, 0)
+  }, [])
+
   return (
     <section className="relative min-h-screen overflow-hidden bg-gradient-to-br from-blue-50 via-white to-green-50">
       {/* Animated Background Elements */}

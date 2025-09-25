@@ -3,6 +3,11 @@ import { motion } from "framer-motion";
 import ReactMarkdown from "react-markdown";
 
 export default function Recommendations() {
+  useEffect(() => {
+    // Scroll to top when component mounts
+    window.scrollTo(0, 0)
+  }, [])
+
   const [messages, setMessages] = useState([
     {
       sender: "bot",
