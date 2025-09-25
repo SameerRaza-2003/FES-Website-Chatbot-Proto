@@ -7,6 +7,7 @@ import BookSession from './pages/BookSession'
 import CountriesPage from './pages/CountriesPage'
 import CountryDetailPage from './pages/CountryDetailPage'
 import ServicesPage from './pages/ServicesPage'
+import BranchesPage from './pages/BranchesPage'
 import Navbar from './sections/Navbar/Navbar'
 
 function AppContent() {
@@ -28,6 +29,7 @@ function AppContent() {
           <Route path="/countries" element={<CountriesPage />} />
           <Route path="/countries/:slug" element={<CountryDetailPage />} />
           <Route path="/services" element={<ServicesPage />} />
+          <Route path="/branches" element={<BranchesPage />} />
         </Routes>
       </main>
     </div>

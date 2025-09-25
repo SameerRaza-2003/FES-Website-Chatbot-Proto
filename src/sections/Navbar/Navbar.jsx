@@ -108,6 +108,7 @@ export default function Navbar() {
               )}
             </div>
             <Link to="/services" className="hover:text-fes-deep text-center px-1 py-1">Services</Link>
+            <Link to="/branches" className="hover:text-fes-deep text-center px-1 py-1">Branches</Link>
             <Link to="/" className="hover:text-fes-deep text-center px-1 py-1" onClick={(e) => { e.preventDefault(); document.getElementById('testimonials')?.scrollIntoView({ behavior: 'smooth' }); }}>Testimonials</Link>
             <Link
               to="/course-finder"
@@ -184,6 +185,7 @@ export default function Navbar() {
               )}
             </div>
             <Link to="/services" className="block" onClick={() => setOpen(false)}>Services</Link>
+            <Link to="/branches" className="block" onClick={() => setOpen(false)}>Branches</Link>
             <Link to="/" className="block" onClick={(e) => { e.preventDefault(); document.getElementById('testimonials')?.scrollIntoView({ behavior: 'smooth' }); setOpen(false); }}>Testimonials</Link>
             <Link
               to="/course-finder"
