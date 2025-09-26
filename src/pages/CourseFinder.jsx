@@ -6,7 +6,6 @@ import Stepper from '../sections/Course-Finder/Stepper'
 
 const STEPS = [
   { key: 'discipline', title: 'Discipline' },
-  { key: 'study_level', title: 'Study level' },
   { key: 'degree', title: 'Degree' },
   { key: 'duration', title: 'Duration' },
   { key: 'budget', title: 'Budget' },
@@ -18,14 +17,18 @@ export default function CourseFinder() {
   const [answers, setAnswers] = useState({
     discipline: null,
     degree: null,
-    study_level: null,
     duration: null,
     budget: null,
     country: 'United Kingdom'
   })
 
   const handleAnswer = (key, val) => {
-    setAnswers(a => ({ ...a, [key]: val }))
+    // If degree is changed, reset duration as the options will be different
+    if (key === 'degree') {
+      setAnswers(a => ({ ...a, [key]: val, duration: null }))
+    } else {
+      setAnswers(a => ({ ...a, [key]: val }))
+    }
     // auto-advance
     setTimeout(() => setCurrent(c => Math.min(STEPS.length - 1, c + 1)), 100)
   }
@@ -43,6 +46,7 @@ export default function CourseFinder() {
               title={STEPS[current].title}
               onAnswer={handleAnswer}
               initial={answers[STEPS[current].key]}
+              answers={answers}
             />
           </div>
 

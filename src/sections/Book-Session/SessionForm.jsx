@@ -162,14 +162,12 @@ export default function MultiStepForm() {
   const nextStep = () => {
     if (isStepValid() && step < steps.length - 1) {
       setStep(step + 1);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
   const prevStep = () => {
     if (step > 0) {
       setStep(step - 1);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 

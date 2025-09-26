@@ -26,9 +26,6 @@ export default function Recommendations() {
     "Scholarship opportunities?"
   ];
 
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
 
   const sendMessage = (text) => {
     if (!text.trim()) return;
