@@ -137,26 +137,26 @@ export default function CountriesPage({onGetStarted}) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 whileHover={{
-                  y: -8,
+                  y: -6,
                   scale: 1.02,
-                  transition: { duration: 0.3 },
+                  transition: { duration: 0.2, ease: "easeOut" },
                 }}
                 onClick={() => handleCountryClick(country.slug)}
-                className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer overflow-hidden group border border-gray-100"
+                className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-200 ease-out cursor-pointer overflow-hidden group border border-gray-100"
               >
                 {/* Flag Image */}
                 <div className="relative h-48 overflow-hidden">
                   <img
                     src={country.flag}
                     alt={`${country.name} flag`}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300 ease-out"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200 ease-out" />
                 </div>
 
                 {/* Card Content */}
                 <div className="p-6">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2 group-hover:text-fes-deep transition-colors duration-300">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2 group-hover:text-fes-deep transition-colors duration-200 ease-out">
                     {country.name}
                   </h3>
 
@@ -169,10 +169,10 @@ export default function CountriesPage({onGetStarted}) {
                   </p>
 
                   {/* Hover indicator */}
-                  <div className="mt-4 flex items-center text-fes-deep opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="mt-4 flex items-center text-fes-deep opacity-0 group-hover:opacity-100 transition-opacity duration-200 ease-out">
                     <span className="text-sm font-medium">Learn more</span>
                     <svg
-                      className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform duration-300"
+                      className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform duration-200 ease-out"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -188,7 +188,7 @@ export default function CountriesPage({onGetStarted}) {
                 </div>
 
                 {/* Subtle glow effect */}
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-fes-blue/5 to-fes-deep/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-fes-blue/5 to-fes-deep/5 opacity-0 group-hover:opacity-100 transition-opacity duration-200 ease-out pointer-events-none" />
               </motion.div>
             ))}
           </motion.div>
