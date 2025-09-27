@@ -3,6 +3,7 @@ import QuestionStep from '../sections/Course-Finder/QuestionStep'
 import ProfileSummary from '../sections/Course-Finder/ProfileSummary'
 import Results from '../sections/Course-Finder/Results'
 import Stepper from '../sections/Course-Finder/Stepper'
+import SEO from '../components/SEO'
 
 const STEPS = [
   { key: 'discipline', title: 'Discipline' },
@@ -36,8 +37,15 @@ export default function CourseFinder() {
   const goTo = (idx) => setCurrent(idx)
 
   return (
-    <div className="w-full max-w-7xl mx-auto p-8 md:p-12">
-      <Stepper steps={STEPS} current={current} />
+    <>
+      <SEO 
+        title="Course Finder - Find Your Perfect Study Program | FES Consultancy"
+        description="Discover the perfect study program with our interactive course finder. Filter by discipline, degree level, duration, budget, and country to find your ideal course."
+        keywords="course finder, study program finder, university courses, degree finder, study abroad programs, education search"
+        url="/course-finder"
+      />
+      <div className="w-full max-w-7xl mx-auto p-8 md:p-12">
+        <Stepper steps={STEPS} current={current} />
       <div className="mt-8 grid grid-cols-1 md:grid-cols-4 gap-8 min-h-[600px]">
         <div className="md:col-span-3 flex flex-col gap-6">
           <div className="p-6 border rounded-lg bg-white shadow-sm">
@@ -67,5 +75,6 @@ export default function CourseFinder() {
 
       </div>
     </div>
+    </>
   )
 }

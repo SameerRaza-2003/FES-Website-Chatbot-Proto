@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { countries } from "../data/countries";
 import countriesBackground from "../assets/countries_background.png";
+import SEO from "../components/SEO";
+import { seoConfig } from "../data/seoData";
 
 // Counter component for animated numbers
 const AnimatedCounter = ({ end, duration = 3000, suffix = "" }) => {
@@ -51,9 +53,11 @@ export default function CountriesPage({onGetStarted}) {
   };
 
   return (
-    <div
-      className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 relative pt-5"
-      style={{
+    <>
+      <SEO {...seoConfig.countries} />
+      <div
+        className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 relative pt-5"
+        style={{
         backgroundImage: `url(${countriesBackground})`,
         backgroundSize: "cover",
         backgroundPosition: "center center",
@@ -225,5 +229,6 @@ export default function CountriesPage({onGetStarted}) {
         </div>
       </div>
     </div>
+    </>
   );
 }

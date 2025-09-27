@@ -4,6 +4,8 @@ import { motion } from 'framer-motion'
 import { ArrowLeft, Users, GraduationCap, BookOpen, Star, DollarSign, MapPin } from 'lucide-react'
 import { countries } from '../data/countries'
 import { countryDetails } from '../data/countryDetails'
+import SEO from '../components/SEO'
+import { countrySEOData, generateCountryStructuredData } from '../data/seoData'
 
 export default function CountryDetailPage() {
   const { slug } = useParams()
@@ -49,9 +51,21 @@ export default function CountryDetailPage() {
     )
   }
 
+  const seoData = countrySEOData[slug] || {
+    title: `Study in ${country.name} - Universities & Guide | FES Consultancy`,
+    description: `Complete guide to studying in ${country.name}. Learn about universities, application processes, costs, scholarships, and visa requirements.`,
+    keywords: `study in ${country.name}, ${country.name} universities, ${country.name} education, student visa ${country.name}`
+  }
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
-      {/* Header Section */}
+    <>
+      <SEO 
+        {...seoData}
+        url={`/countries/${slug}`}
+        structuredData={generateCountryStructuredData(country)}
+      />
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
+        {/* Header Section */}
       <div className="pt-8 pb-12">
         <div className="max-w-7xl mx-auto px-6">
           {/* Back Button */}
@@ -240,5 +254,6 @@ export default function CountryDetailPage() {
         </div>
       </div>
     </div>
+    </>
   )
 }

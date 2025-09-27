@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { MapPin, Phone, Mail, Building2, Globe, Star, Sparkles } from 'lucide-react'
 import { branches } from '../data/branches'
+import SEO from '../components/SEO'
 
 const BranchCard = ({ branch, index }) => {
   const [isHovered, setIsHovered] = useState(false)
@@ -200,7 +201,14 @@ export default function BranchesPage() {
   const [activeRegion, setActiveRegion] = useState('punjab')
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+    <>
+      <SEO 
+        title="Our Branches - FES Consultancy Locations | Education Consultants"
+        description="Find FES Consultancy branches near you. We have offices across multiple locations to provide personalized education consultancy services for studying abroad."
+        keywords="FES consultancy branches, education consultant locations, study abroad offices, consultancy near me, education guidance centers"
+        url="/branches"
+      />
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-r from-blue-900 via-blue-800 to-purple-900 text-white py-20">
         {/* Animated Background */}
@@ -331,5 +339,6 @@ export default function BranchesPage() {
         </div>
       </section>
     </div>
+    </>
   )
 }

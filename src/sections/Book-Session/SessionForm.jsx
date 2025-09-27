@@ -8,7 +8,7 @@ export default function MultiStepForm() {
       description: "Let's get to know you better",
       fields: [
         { label: "Full Name", name: "fullName", type: "text", required: true, validation: /^[a-zA-Z\s]{2,50}$/ },
-        { label: "WhatsApp Number", name: "whatsapp", type: "tel", required: true, validation: /^[0-9]{10,15}$/
+        { label: "WhatsApp Number", name: "whatsapp", type: "tel", required: true, validation: /^[0-9]{11}$/
  },
         { label: "Email Address", name: "email", type: "email", required: true, validation: /^[^\s@]+@[^\s@]+\.[^\s@]+$/ },
         { label: "City of Residence", name: "city", type: "text", required: true, validation: /^[a-zA-Z\s]{2,30}$/ }

@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { GraduationCap, Award, FileText, Languages, Users, Plane, ArrowRight, CheckCircle, Star, MessageCircle, Sparkles, Zap } from 'lucide-react'
 import servicesImg from "../assets/services-background.jpg"
+import SEO from '../components/SEO'
+import { seoConfig } from '../data/seoData'
 
 const services = [
   {
@@ -254,8 +256,10 @@ export default function ServicesPage() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50">
-      {/* Hero Section */}
+    <>
+      <SEO {...seoConfig.services} />
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50">
+        {/* Hero Section */}
       <section className="pt-32 pb-20 px-6 bg-gradient-to-r from-blue-600 to-blue-700 text-white relative overflow-hidden">
         <PulseBackground />
         <div 
@@ -587,5 +591,6 @@ export default function ServicesPage() {
         </div>
       </section>
     </div>
+    </>
   )
 }

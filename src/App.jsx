@@ -1,5 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom'
+import { HelmetProvider } from 'react-helmet-async'
 import HomePage from './pages/HomePage'
 import Recommendations from './pages/Recommendations'
 import CourseFinder from './pages/CourseFinder'
@@ -38,8 +39,10 @@ function AppContent() {
 
 export default function App() {
   return (
-    <Router>
-      <AppContent />
-    </Router>
+    <HelmetProvider>
+      <Router>
+        <AppContent />
+      </Router>
+    </HelmetProvider>
   )
 }

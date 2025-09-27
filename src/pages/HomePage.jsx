@@ -4,6 +4,8 @@ import Services from '../sections/Home/Services'
 import Testimonials from '../sections/Home/Testimonials'
 import Footer from '../sections/Home/Footer'
 import Faqs from '../sections/Home/Faqs'
+import SEO from '../components/SEO'
+import { seoConfig } from '../data/seoData'
 
 export default function HomePage({ onGetStarted }){
   useEffect(() => {
@@ -13,6 +15,7 @@ export default function HomePage({ onGetStarted }){
 
   return (
     <>
+      <SEO {...seoConfig.home} />
       <Hero onGetStarted={onGetStarted} />
       <Services />
       <Testimonials />

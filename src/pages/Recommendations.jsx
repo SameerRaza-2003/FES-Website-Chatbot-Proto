@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import ReactMarkdown from "react-markdown";
+import SEO from '../components/SEO';
 
 export default function Recommendations() {
   useEffect(() => {
@@ -84,8 +85,15 @@ export default function Recommendations() {
   };
 
   return (
-    <section className="pt-14 pb-8 bg-gray-100 relative overflow-hidden min-h-screen">
-      {/* Background decoration */}
+    <>
+      <SEO 
+        title="AI Study Abroad Recommendations - FES Consultancy"
+        description="Get personalized study abroad recommendations with our AI-powered counselor. Discover the best universities, courses, and countries for your academic goals."
+        keywords="study abroad recommendations, AI counselor, university recommendations, course finder, personalized education guidance"
+        url="/recommendations"
+      />
+      <section className="pt-14 pb-8 bg-gray-100 relative overflow-hidden min-h-screen">
+        {/* Background decoration */}
       <div className="absolute top-20 right-20 w-72 h-72 bg-fes-blue/10 rounded-full blur-3xl"></div>
       <div className="absolute bottom-20 left-20 w-96 h-96 bg-fes-deep/10 rounded-full blur-3xl"></div>
       
@@ -230,5 +238,6 @@ export default function Recommendations() {
         </div>
       </div>
     </section>
+    </>
   );
 }

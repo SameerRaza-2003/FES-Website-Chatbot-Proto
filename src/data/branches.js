@@ -46,40 +46,40 @@ export const branches = {
     color: 'from-green-600 to-green-800',
     locations: [
       {
-        name: 'Peshawar',
-        image: lahoreImg,
-        address: 'Coming Soon - Peshawar Branch',
-        phone: '+92 XXX XXXXXXX',
-        email: 'peshawar@fes.com.pk'
-      },
-      {
-        name: 'Abbottabad',
-        image: lahoreImg,
-        address: 'Coming Soon - Abbottabad Branch',
-        phone: '+92 XXX XXXXXXX',
-        email: 'abbottabad@fes.com.pk'
-      },
-      {
-        name: 'Mardan',
-        image: lahoreImg,
-        address: 'Coming Soon - Mardan Branch',
-        phone: '+92 XXX XXXXXXX',
-        email: 'mardan@fes.com.pk'
-      },
-      {
-        name: 'Swat',
-        image: lahoreImg,
-        address: 'Coming Soon - Swat Branch',
-        phone: '+92 XXX XXXXXXX',
-        email: 'swat@fes.com.pk'
-      },
-      {
-        name: 'Nowshera',
-        image: lahoreImg,
-        address: 'Coming Soon - Nowshera Branch',
-        phone: '+92 XXX XXXXXXX',
-        email: 'nowshera@fes.com.pk'
-      }
+      //   name: 'Peshawar',
+      //   image: lahoreImg,
+      //   address: 'Coming Soon - Peshawar Branch',
+      //   phone: '+92 XXX XXXXXXX',
+      //   email: 'peshawar@fes.com.pk'
+      // },
+      // {
+      //   name: 'Abbottabad',
+      //   image: lahoreImg,
+      //   address: 'Coming Soon - Abbottabad Branch',
+      //   phone: '+92 XXX XXXXXXX',
+      //   email: 'abbottabad@fes.com.pk'
+      // },
+      // {
+      //   name: 'Mardan',
+      //   image: lahoreImg,
+      //   address: 'Coming Soon - Mardan Branch',
+      //   phone: '+92 XXX XXXXXXX',
+      //   email: 'mardan@fes.com.pk'
+      // },
+      // {
+      //   name: 'Swat',
+      //   image: lahoreImg,
+      //   address: 'Coming Soon - Swat Branch',
+      //   phone: '+92 XXX XXXXXXX',
+      //   email: 'swat@fes.com.pk'
+      // },
+      // {
+      //   name: 'Nowshera',
+      //   image: lahoreImg,
+      //   address: 'Coming Soon - Nowshera Branch',
+      //   phone: '+92 XXX XXXXXXX',
+      //   email: 'nowshera@fes.com.pk'
+       }
     ]
   },
   international: {
@@ -89,21 +89,21 @@ export const branches = {
       {
         name: 'United Kingdom',
         image: ukImg,
-        address: 'London Office - Coming Soon',
+        address: 'London Office',
         phone: '+44 XXXX XXXXXX',
         email: 'uk@fes.com.pk'
       },
       {
         name: 'Malaysia',
         image: malaysiaImg,
-        address: 'Kuala Lumpur Office - Coming Soon',
+        address: 'Kuala Lumpur Office',
         phone: '+60 XX XXX XXXX',
         email: 'malaysia@fes.com.pk'
       },
       {
         name: 'UAE',
         image: uaeImg,
-        address: 'Dubai Office - Coming Soon',
+        address: 'Dubai Office',
         phone: '+971 XX XXX XXXX',
         email: 'uae@fes.com.pk'
       }

@@ -1,6 +1,8 @@
 import SessionForm from "../sections/Book-Session/SessionForm";
 import { motion } from "framer-motion";
 import React, { useEffect } from 'react';
+import SEO from '../components/SEO';
+import { seoConfig } from '../data/seoData';
 
 export default function BookSession() {
   useEffect(() => {
@@ -9,8 +11,10 @@ export default function BookSession() {
   }, [])
 
   return (
-    <section className="relative min-h-screen overflow-hidden bg-gradient-to-br from-blue-50 via-white to-green-50">
-      {/* Animated Background Elements */}
+    <>
+      <SEO {...seoConfig.contact} />
+      <section className="relative min-h-screen overflow-hidden bg-gradient-to-br from-blue-50 via-white to-green-50">
+        {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
           className="absolute -right-32 top-10 w-72 h-72 rounded-full bg-gradient-to-br from-fes-blue/20 to-fes-deep/10 blur-3xl mix-blend-overlay pointer-events-none"
@@ -125,5 +129,6 @@ export default function BookSession() {
         </motion.div>
       </div>
     </section>
+    </>
   );
 }
