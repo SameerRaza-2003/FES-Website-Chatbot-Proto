@@ -2,18 +2,18 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 
 const SEO = ({
-  title = "FES Consultancy - Study Abroad Education Consultants",
-  description = "Expert education consultancy services for studying abroad. Get personalized guidance for university applications, visa assistance, and career counseling for UK, USA, Canada, Australia and more.",
-  keywords = "study abroad, education consultancy, university applications, student visa, overseas education, study in UK, study in USA, study in Canada, study in Australia",
+  title = "FES Higher Education Consultants - Study Overseas | FES Mentora",
+  description = "Professional overseas education consultancy services by FES Higher Education Consultants. Expert guidance for university applications, student visa assistance, career counseling, and admission guidance worldwide.",
+  keywords = "higher education consultants, study overseas, overseas education services, professional education consultants, student visa assistance, career counseling, admission guidance, international education",
   image = "/og-image.jpg",
   url = "https://fesmentora.com",
   type = "website",
-  author = "FES Consultancy",
+  author = "FES Higher Education Consultants",
   canonical,
   noindex = false,
   structuredData
 }) => {
-  const siteTitle = "FES Consultancy";
+  const siteTitle = "FES Mentora";
   const fullTitle = title.includes(siteTitle) ? title : `${title} | ${siteTitle}`;
   const fullUrl = url.startsWith('http') ? url : `https://fesmentora.com${url}`;
 

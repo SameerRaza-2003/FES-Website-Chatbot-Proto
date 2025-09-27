@@ -1,15 +1,15 @@
 // SEO data configurations for different pages
 export const seoConfig = {
   home: {
-    title: "FES Consultancy - Study Abroad Education Consultants",
-    description: "Expert education consultancy services for studying abroad. Get personalized guidance for university applications, visa assistance, and career counseling for UK, USA, Canada, Australia and more.",
-    keywords: "study abroad, education consultancy, university applications, student visa, overseas education, study in UK, study in USA, study in Canada, study in Australia, education consultant near me",
+    title: "FES Higher Education Consultants - Study Overseas | FES Mentora",
+    description: "FES Higher Education Consultants providing excellent overseas education consultancy services. Expert guidance for university applications, student visa assistance, and career counseling worldwide.",
+    keywords: "higher education consultants, study overseas, overseas education services, professional education consultants, student visa assistance, career counseling, admission guidance, study abroad consultancy, international education, education consultants",
     url: "/",
     structuredData: {
       "@context": "https://schema.org",
       "@type": "Organization",
-      "name": "FES Consultancy",
-      "description": "Expert education consultancy services for studying abroad",
+      "name": "FES Higher Education Consultants",
+      "description": "Professional overseas education consultancy services providing excellent guidance for international students",
       "url": "https://fesmentora.com",
       "logo": "https://fesmentora.com/logo.png",
       "contactPoint": {
@@ -50,20 +50,20 @@ export const seoConfig = {
   },
 
   services: {
-    title: "Education Consultancy Services - FES Consultancy",
-    description: "Comprehensive education consultancy services including university selection, application assistance, visa guidance, scholarship advice, and career counseling for international students.",
-    keywords: "education consultancy services, university applications, student visa assistance, scholarship guidance, career counseling, study abroad services",
+    title: "Overseas Education Services - Professional Education Consultants | FES Mentora",
+    description: "Complete overseas education services by professional education consultants. Career counseling, admission guidance, student visa assistance, pre-departure orientation, and post-departure support.",
+    keywords: "overseas education services, professional education consultants, career counseling, admission guidance, student visa assistance, pre departure orientation, post departure support, appeals and review, medical requirements, IELTS TOEFL classes",
     url: "/services",
     structuredData: {
       "@context": "https://schema.org",
       "@type": "Service",
-      "name": "Education Consultancy Services",
+      "name": "Overseas Education Services",
       "provider": {
         "@type": "Organization",
-        "name": "FES Consultancy"
+        "name": "FES Higher Education Consultants"
       },
-      "description": "Comprehensive education consultancy services for international students",
-      "serviceType": "Educational Consulting"
+      "description": "Professional overseas education services including career counseling, admission guidance, student visa assistance, and pre-departure orientation",
+      "serviceType": "Higher Education Consulting"
     }
   },
 
@@ -75,9 +75,9 @@ export const seoConfig = {
   },
 
   contact: {
-    title: "Contact FES Consultancy - Get Expert Education Guidance",
-    description: "Contact FES Consultancy for personalized education consultancy services. Book a consultation to discuss your study abroad plans and get expert guidance.",
-    keywords: "contact education consultant, study abroad consultation, book appointment, education guidance, international student services",
+    title: "Contact FES Higher Education Consultants - Book Consultation | FES Mentora",
+    description: "Contact FES Higher Education Consultants for personalized overseas education services. Book a consultation with our professional education consultants for expert guidance.",
+    keywords: "contact education consultants, higher education consultants, book consultation, overseas education consultation, professional education guidance, student counseling services",
     url: "/contact",
     structuredData: {
       "@context": "https://schema.org",
@@ -91,24 +91,24 @@ export const seoConfig = {
 // Country-specific SEO data
 export const countrySEOData = {
   uk: {
-    title: "Study in UK - Universities, Costs & Applications | FES Consultancy",
-    description: "Complete guide to studying in the UK. Explore top universities, application processes, costs, scholarships, and visa requirements. Get expert guidance from FES Consultancy.",
-    keywords: "study in UK, UK universities, British education, UK student visa, study in England, UK university applications, scholarships UK"
+    title: "Study in UK - Higher Education Consultants | FES Mentora",
+    description: "Study in UK with FES Higher Education Consultants. Expert guidance for UK universities, student visa assistance, admission guidance, and career counseling for British education.",
+    keywords: "study in UK, UK higher education, UK student visa assistance, UK university admission guidance, study overseas UK, British higher education consultants, UK education services"
   },
   usa: {
-    title: "Study in USA - Top Universities & Application Guide | FES Consultancy",
-    description: "Discover opportunities to study in the USA. Learn about top American universities, application requirements, costs, scholarships, and F-1 visa process.",
-    keywords: "study in USA, American universities, US education, F1 visa, study in America, US university applications, scholarships USA"
+    title: "Study in USA - Overseas Education Services | FES Mentora",
+    description: "Study in USA with professional education consultants. Complete guidance for American universities, F-1 student visa assistance, admission guidance, and career counseling.",
+    keywords: "study in USA, USA overseas education, F1 student visa assistance, American university admission guidance, USA higher education consultants, study overseas America"
   },
   canada: {
-    title: "Study in Canada - Universities, Immigration & Costs | FES Consultancy",
-    description: "Your complete guide to studying in Canada. Explore Canadian universities, immigration pathways, costs, scholarships, and post-graduation work opportunities.",
-    keywords: "study in Canada, Canadian universities, Canada education, study permit, Canadian immigration, scholarships Canada"
+    title: "Study in Canada - Higher Education Consultants | FES Mentora",
+    description: "Study in Canada with FES Higher Education Consultants. Expert guidance for Canadian universities, study permit assistance, immigration pathways, and career counseling.",
+    keywords: "study in Canada, Canada higher education, study permit assistance, Canadian university admission guidance, Canada overseas education services, Canadian immigration guidance"
   },
   australia: {
-    title: "Study in Australia - Universities & Student Visa Guide | FES Consultancy",
-    description: "Everything you need to know about studying in Australia. Top universities, application process, student visa requirements, costs, and post-study work options.",
-    keywords: "study in Australia, Australian universities, Australia education, student visa Australia, scholarships Australia"
+    title: "Study in Australia - Professional Education Consultants | FES Mentora",
+    description: "Study in Australia with professional education consultants. Complete guidance for Australian universities, student visa assistance, admission guidance, and post-study work options.",
+    keywords: "study in Australia, Australia overseas education, Australian student visa assistance, Australia university admission guidance, Australia higher education consultants, study overseas Australia"
   },
   germany: {
     title: "Study in Germany - Free Education & Top Universities | FES Consultancy",
