@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
-import logo from '../../assets/logo.png'
 import { AIAssistantLink, BookSessionLink, CourseFinderLink } from '../../components/ActionButtons'
 import AnimatedLogo from '../../components/AnimatedLogo'
 import { countries } from '../../data/countries'
