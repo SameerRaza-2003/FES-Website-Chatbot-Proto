@@ -5,42 +5,8 @@ import { countries } from "../data/countries";
 import countriesBackground from "../assets/countries_background.png";
 import SEO from "../components/SEO";
 import { seoConfig } from "../data/seoData";
-
-// Counter component for animated numbers
-const AnimatedCounter = ({ end, duration = 3000, suffix = "" }) => {
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    let startTime = null;
-    const startValue = 0;
-    const endValue = end;
-
-    const animate = (currentTime) => {
-      if (startTime === null) startTime = currentTime;
-      const progress = Math.min((currentTime - startTime) / duration, 1);
-
-      // Linear interpolation for even increments
-      const currentCount = Math.floor(
-        progress * (endValue - startValue) + startValue
-      );
-
-      setCount(currentCount);
-
-      if (progress < 1) {
-        requestAnimationFrame(animate);
-      }
-    };
-
-    requestAnimationFrame(animate);
-  }, [end, duration]);
-
-  return (
-    <span>
-      {count}
-      {suffix}
-    </span>
-  );
-};
+import { ActionButtonGroup } from "../components/ActionButtons";
+import AnimatedCounter from "../components/AnimatedCounter";
 
 export default function CountriesPage({onGetStarted}) {
   useEffect(() => {
@@ -211,20 +177,13 @@ export default function CountriesPage({onGetStarted}) {
               Our expert consultants can help you find the perfect study
               destination based on your goals, budget, and preferences.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button
-                onClick={() => navigate("/course-finder")}
-                className="px-6 py-3 bg-fes-deep text-white rounded-full hover:bg-blue-900 transition-colors duration-300 font-semibold"
-              >
-                Find Courses
-              </button>
-              <button
-                onClick={() => navigate("/book-session")}
-                className="px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-full hover:shadow-lg transform hover:scale-105 transition-all duration-300 font-semibold"
-              >
-                Book Consultation
-              </button>
-            </div>
+            <ActionButtonGroup 
+              courseTitle="Find Courses"
+              bookTitle="Book Consultation"
+              showAI={false}
+              size="medium"
+              layout="horizontal"
+            />
           </motion.div>
         </div>
       </div>

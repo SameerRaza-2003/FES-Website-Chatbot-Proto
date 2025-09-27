@@ -7,42 +7,9 @@ import heroImage1 from '../../assets/hero/fesconsultants2025_09_23_22_30_3321d5e
 import heroImage2 from '../../assets/hero/fesconsultants2025_09_23_22_30_48b7a6971a-be6d-4e78-bccb-73cf7538a959.jpg'
 import heroImage3 from '../../assets/hero/fesconsultants2025_09_23_22_32_1682df95c9-5d2f-4933-952a-d7953c5d0cd9.jpg'
 import heroImage4 from '../../assets/hero/fesconsultants2025_09_23_22_32_33703a02d9-5158-4940-9bdc-e5650cfe3ac5.jpg'
-
-const useCounter = (target, duration = 2000, suffix = '') => {
-  const [count, setCount] = useState(0)
-  
-  useEffect(() => {
-    let startTime
-    let animationFrame
-    
-    const animate = (timestamp) => {
-      if (!startTime) startTime = timestamp
-      const progress = Math.min((timestamp - startTime) / duration, 1)
-      
-      if (target === 22 && suffix === ' yrs') {
-        setCount(Math.floor(progress * target))
-      } else if (target === 170 && suffix === '+') {
-        setCount(Math.floor(progress * target))
-      } else if (target === 95 && suffix === '%') {
-        setCount(Math.floor(progress * target))
-      }
-      
-      if (progress < 1) {
-        animationFrame = requestAnimationFrame(animate)
-      }
-    }
-    
-    animationFrame = requestAnimationFrame(animate)
-    
-    return () => {
-      if (animationFrame) {
-        cancelAnimationFrame(animationFrame)
-      }
-    }
-  }, [target, duration, suffix])
-  
-  return count + suffix
-}
+import { BookSessionLink } from '../../components/ActionButtons'
+import { useAnimatedCounter } from '../../hooks/useAnimatedCounter'
+import { useCarousel } from '../../hooks/useCarousel'
 
 export default function Hero({ onGetStarted }){
   const { scrollYProgress } = useScroll()
@@ -51,26 +18,9 @@ export default function Hero({ onGetStarted }){
   const scale = useTransform(scrollYProgress, [0, 0.5], [0.6, 1.5])
   const opacity = useTransform(scrollYProgress, [0, 0.3], [0.3, 0])
   
-  // Carousel state
-  const [currentSlide, setCurrentSlide] = useState(0)
+  // Carousel setup
   const heroImages = [heroImage1, heroImage2, heroImage3, heroImage4]
-  
-  // Auto-rotate carousel
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % heroImages.length)
-    }, 4000) // Change slide every 4 seconds
-    
-    return () => clearInterval(interval)
-  }, [heroImages.length])
-  
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % heroImages.length)
-  }
-  
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + heroImages.length) % heroImages.length)
-  }
+  const { currentSlide, nextSlide, prevSlide, goToSlide } = useCarousel(heroImages, 4000)
   
   return (
     <section id="home" className="relative overflow-hidden pt-4 sm:pt-6 md:pt-8">
@@ -84,12 +34,11 @@ export default function Hero({ onGetStarted }){
             For 20+ years, we’ve helped students secure admissions, scholarships, and visas at top universities in the UK, USA, Canada, Australia, Europe, and Türkiye. With 1,400+ partner institutions, 18 global offices, and 15,000+ success stories, we make your study abroad dreams a reality.
             </motion.p>
             <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{delay:0.3}} className="mt-6 sm:mt-8">
-              <Link
-                to="/book-session"
-                className="inline-block px-4 py-2 sm:px-6 sm:py-3 rounded-full bg-gradient-to-r from-green-500 to-emerald-600 text-white shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
-              >
-                Book A Free Consultancy Session
-              </Link>
+              <BookSessionLink 
+                title="Book A Free Consultancy Session"
+                size="large"
+                variant="primary"
+              />
             </motion.div>
             <div className="mt-6 sm:mt-8 grid grid-cols-3 gap-2 sm:gap-4 text-sm">
               <motion.div 
@@ -98,7 +47,7 @@ export default function Hero({ onGetStarted }){
                 transition={{delay:0.4, duration:0.6}}
                 className="glass p-3 sm:p-4 text-center"
               >
-                <div className="font-bold text-2xl">{useCounter(95, 3000, '%')}</div>
+                <div className="font-bold text-2xl">{useAnimatedCounter(95, 3000, '%')}</div>
                 <div className="text-gray-500">Visa Acceptance Rate</div>
               </motion.div>
               <motion.div 
@@ -107,7 +56,7 @@ export default function Hero({ onGetStarted }){
                 transition={{delay:0.5, duration:0.6}}
                 className="glass p-3 sm:p-4 text-center"
               >
-                <div className="font-bold text-2xl">{useCounter(170, 3000, '+')}</div>
+                <div className="font-bold text-2xl">{useAnimatedCounter(170, 3000, '+')}</div>
                 <div className="text-gray-500">Universities and Colleges</div>
               </motion.div>
               <motion.div 
@@ -116,7 +65,7 @@ export default function Hero({ onGetStarted }){
                 transition={{delay:0.6, duration:0.6}}
                 className="glass p-3 sm:p-4 text-center"
               >
-                <div className="font-bold text-2xl">{useCounter(22, 3000, ' yrs')}</div>
+                <div className="font-bold text-2xl">{useAnimatedCounter(22, 3000, ' yrs')}</div>
                 <div className="text-gray-500">Industry Experience</div>
               </motion.div>
             </div>
@@ -170,7 +119,7 @@ export default function Hero({ onGetStarted }){
                   {heroImages.map((_, index) => (
                     <button
                       key={index}
-                      onClick={() => setCurrentSlide(index)}
+                      onClick={() => goToSlide(index)}
                       className={`w-2 h-2 rounded-full transition-all duration-300 ${
                         currentSlide === index 
                           ? 'bg-white scale-125' 
