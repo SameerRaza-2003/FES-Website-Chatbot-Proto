@@ -8,7 +8,7 @@ export default function MultiStepForm() {
       description: "Let's get to know you better",
       fields: [
         { label: "Full Name", name: "fullName", type: "text", required: true, validation: /^[a-zA-Z\s]{2,50}$/ },
-        { label: "WhatsApp Number", name: "whatsapp", type: "tel", required: true, validation: /^[0-9]{10,15}$/
+        { label: "WhatsApp Number", name: "whatsapp", type: "tel", required: true, validation: /^[0-9]{11}$/
  },
         { label: "Email Address", name: "email", type: "email", required: true, validation: /^[^\s@]+@[^\s@]+\.[^\s@]+$/ },
         { label: "City of Residence", name: "city", type: "text", required: true, validation: /^[a-zA-Z\s]{2,30}$/ }
@@ -159,29 +159,64 @@ export default function MultiStepForm() {
     });
   };
 
+  const isAllStepsValid = () => {
+    return steps.every((stepData, stepIndex) => {
+      return stepData.fields.every(field => {
+        const value = formData[field.name];
+        return !validateField(field.name, value, field);
+      });
+    });
+  };
+
+  const isFormComplete = () => {
+    return step === steps.length - 1 && isAllStepsValid();
+  };
+
   const nextStep = () => {
     if (isStepValid() && step < steps.length - 1) {
       setStep(step + 1);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
   const prevStep = () => {
     if (step > 0) {
       setStep(step - 1);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
  const handleSubmit = async (e) => {
   e.preventDefault();
 
-  if (!isStepValid()) {
-    steps[step].fields.forEach(field => {
-      setTouchedFields(prev => new Set(prev).add(field.name));
-      const error = validateField(field.name, formData[field.name], field);
-      setErrors(prev => ({ ...prev, [field.name]: error }));
+  // Check if user is on the last page
+  if (step !== steps.length - 1) {
+    alert('Please complete all steps before submitting the form.');
+    return;
+  }
+
+  // Check if all steps are valid
+  if (!isAllStepsValid()) {
+    // Mark all fields as touched to show errors
+    steps.forEach((stepData, stepIndex) => {
+      stepData.fields.forEach(field => {
+        setTouchedFields(prev => new Set(prev).add(field.name));
+        const error = validateField(field.name, formData[field.name], field);
+        setErrors(prev => ({ ...prev, [field.name]: error }));
+      });
     });
+    
+    // Navigate to the first step with errors
+    for (let i = 0; i < steps.length; i++) {
+      const stepHasErrors = steps[i].fields.some(field => {
+        const value = formData[field.name];
+        return validateField(field.name, value, field);
+      });
+      
+      if (stepHasErrors) {
+        setStep(i);
+        alert('Please fill in all required fields correctly before submitting.');
+        return;
+      }
+    }
     return;
   }
 
@@ -398,9 +433,9 @@ export default function MultiStepForm() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   type="submit"
-                  disabled={isSubmitting || !isStepValid()}
+                  disabled={isSubmitting || !isFormComplete()}
                   className={`w-full sm:w-auto px-6 py-3 rounded-full font-semibold transition-all duration-300 flex items-center justify-center ${
-                    isSubmitting || !isStepValid()
+                    isSubmitting || !isFormComplete()
                       ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
                       : 'bg-gradient-to-r from-green-500 to-green-600 text-white shadow-lg hover:shadow-xl'
                   }`}

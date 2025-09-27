@@ -3,42 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { countries } from "../data/countries";
 import countriesBackground from "../assets/countries_background.png";
-
-// Counter component for animated numbers
-const AnimatedCounter = ({ end, duration = 3000, suffix = "" }) => {
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    let startTime = null;
-    const startValue = 0;
-    const endValue = end;
-
-    const animate = (currentTime) => {
-      if (startTime === null) startTime = currentTime;
-      const progress = Math.min((currentTime - startTime) / duration, 1);
-
-      // Linear interpolation for even increments
-      const currentCount = Math.floor(
-        progress * (endValue - startValue) + startValue
-      );
-
-      setCount(currentCount);
-
-      if (progress < 1) {
-        requestAnimationFrame(animate);
-      }
-    };
-
-    requestAnimationFrame(animate);
-  }, [end, duration]);
-
-  return (
-    <span>
-      {count}
-      {suffix}
-    </span>
-  );
-};
+import SEO from "../components/SEO";
+import { seoConfig } from "../data/seoData";
+import { ActionButtonGroup } from "../components/ActionButtons";
+import AnimatedCounter from "../components/AnimatedCounter";
 
 export default function CountriesPage({onGetStarted}) {
   useEffect(() => {
@@ -51,9 +19,11 @@ export default function CountriesPage({onGetStarted}) {
   };
 
   return (
-    <div
-      className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 relative pt-5"
-      style={{
+    <>
+      <SEO {...seoConfig.countries} />
+      <div
+        className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 relative pt-5"
+        style={{
         backgroundImage: `url(${countriesBackground})`,
         backgroundSize: "cover",
         backgroundPosition: "center center",
@@ -137,26 +107,26 @@ export default function CountriesPage({onGetStarted}) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 whileHover={{
-                  y: -8,
+                  y: -6,
                   scale: 1.02,
-                  transition: { duration: 0.3 },
+                  transition: { duration: 0.2, ease: "easeOut" },
                 }}
                 onClick={() => handleCountryClick(country.slug)}
-                className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer overflow-hidden group border border-gray-100"
+                className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-200 ease-out cursor-pointer overflow-hidden group border border-gray-100"
               >
                 {/* Flag Image */}
                 <div className="relative h-48 overflow-hidden">
                   <img
                     src={country.flag}
                     alt={`${country.name} flag`}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300 ease-out"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200 ease-out" />
                 </div>
 
                 {/* Card Content */}
                 <div className="p-6">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2 group-hover:text-fes-deep transition-colors duration-300">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2 group-hover:text-fes-deep transition-colors duration-200 ease-out">
                     {country.name}
                   </h3>
 
@@ -169,10 +139,10 @@ export default function CountriesPage({onGetStarted}) {
                   </p>
 
                   {/* Hover indicator */}
-                  <div className="mt-4 flex items-center text-fes-deep opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="mt-4 flex items-center text-fes-deep opacity-0 group-hover:opacity-100 transition-opacity duration-200 ease-out">
                     <span className="text-sm font-medium">Learn more</span>
                     <svg
-                      className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform duration-300"
+                      className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform duration-200 ease-out"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -188,7 +158,7 @@ export default function CountriesPage({onGetStarted}) {
                 </div>
 
                 {/* Subtle glow effect */}
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-fes-blue/5 to-fes-deep/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-fes-blue/5 to-fes-deep/5 opacity-0 group-hover:opacity-100 transition-opacity duration-200 ease-out pointer-events-none" />
               </motion.div>
             ))}
           </motion.div>
@@ -207,23 +177,17 @@ export default function CountriesPage({onGetStarted}) {
               Our expert consultants can help you find the perfect study
               destination based on your goals, budget, and preferences.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button
-                onClick={() => navigate("/course-finder")}
-                className="px-6 py-3 bg-fes-deep text-white rounded-full hover:bg-blue-900 transition-colors duration-300 font-semibold"
-              >
-                Find Courses
-              </button>
-              <button
-                onClick={() => navigate("/book-session")}
-                className="px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-full hover:shadow-lg transform hover:scale-105 transition-all duration-300 font-semibold"
-              >
-                Book Consultation
-              </button>
-            </div>
+            <ActionButtonGroup 
+              courseTitle="Find Courses"
+              bookTitle="Book Consultation"
+              showAI={false}
+              size="medium"
+              layout="horizontal"
+            />
           </motion.div>
         </div>
       </div>
     </div>
+    </>
   );
 }

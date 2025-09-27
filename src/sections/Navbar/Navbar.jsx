@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { Menu, X } from 'lucide-react'
 import { Link, useLocation } from 'react-router-dom'
+import { Menu, X } from 'lucide-react'
+import { AIAssistantLink, BookSessionLink, CourseFinderLink } from '../../components/ActionButtons'
 import AnimatedLogo from '../../components/AnimatedLogo'
 import { countries } from '../../data/countries'
 
@@ -108,25 +109,25 @@ export default function Navbar() {
               )}
             </div>
             <Link to="/services" className="hover:text-fes-deep text-center px-1 py-1">Services</Link>
-            <Link to="/" className="hover:text-fes-deep text-center px-1 py-1" onClick={(e) => { e.preventDefault(); document.getElementById('testimonials')?.scrollIntoView({ behavior: 'smooth' }); }}>Testimonials</Link>
-            <Link
-              to="/course-finder"
-              className="ml-2 px-3 py-1.5 rounded-full border border-fes-blue text-fes-blue hover:bg-fes-blue hover:text-white transition text-center justify-center inline-flex items-center"
-            >
-              Course Finder
-            </Link>
-            <Link
-              to="/recommendations"
-              className="ml-1 px-3 py-1.5 rounded-full bg-gradient-to-r from-fes-blue to-fes-deep text-white text-center justify-center inline-flex items-center"
-            >
-              AI Assistant
-            </Link>
-            <Link
-              to="/book-session"
-              className="ml-2 px-4 py-2 rounded-full bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-center justify-center inline-flex items-center"
-            >
-              Book Session
-            </Link>
+            <Link to="/branches" className="hover:text-fes-deep text-center px-1 py-1">Branches</Link>
+            <CourseFinderLink 
+              title="Course Finder"
+              size="medium"
+              variant="outline"
+              className="ml-2"
+            />
+            <AIAssistantLink 
+              title="AI Assistant"
+              size="medium"
+              variant="primary"
+              className="ml-1"
+            />
+            <BookSessionLink 
+              title="Book Session"
+              size="medium"
+              variant="primary"
+              className="ml-2"
+            />
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -184,28 +185,28 @@ export default function Navbar() {
               )}
             </div>
             <Link to="/services" className="block" onClick={() => setOpen(false)}>Services</Link>
-            <Link to="/" className="block" onClick={(e) => { e.preventDefault(); document.getElementById('testimonials')?.scrollIntoView({ behavior: 'smooth' }); setOpen(false); }}>Testimonials</Link>
-            <Link
-              to="/course-finder"
+            <Link to="/branches" className="block" onClick={() => setOpen(false)}>Branches</Link>
+            <CourseFinderLink 
+              title="Course Finder"
+              size="medium"
+              variant="outline"
+              className="block w-full text-center"
               onClick={() => setOpen(false)}
-              className="block w-full py-2 rounded-full border border-fes-blue text-fes-blue hover:bg-fes-blue hover:text-white transition text-center"
-            >
-              Course Finder
-            </Link>
-            <Link
-              to="/recommendations"
+            />
+            <AIAssistantLink 
+              title="AI Assistant"
+              size="medium"
+              variant="primary"
+              className="block w-full text-center"
               onClick={() => setOpen(false)}
-              className="block w-full py-2 rounded-full bg-gradient-to-r from-fes-blue to-fes-deep text-white text-center"
-            >
-              AI Assistant
-            </Link>
-            <Link
-              to="/book-session"
+            />
+            <BookSessionLink 
+              title="Book Session"
+              size="large"
+              variant="primary"
+              className="block w-full text-center"
               onClick={() => setOpen(false)}
-              className="block w-full py-3 rounded-full bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-center"
-            >
-              Book Session
-            </Link>
+            />
           </div>
         )}
       </div>
